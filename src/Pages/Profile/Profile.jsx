@@ -35,7 +35,7 @@ const Profile = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Save
+          Savea
         </Button>
       </Form.Item>
     </Form>
