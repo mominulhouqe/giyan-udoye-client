@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Button, message } from 'antd';
+import { Table, Button, message, Popconfirm } from 'antd';
 import axios from 'axios';
 import BookForm from './BookForm';
 
@@ -11,7 +11,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get('/api/books');
+        const res = await axios.get('http://localhost:5000/api/books'); // Ensure this URL is correct
         console.log('Fetched books:', res.data); // Log the response
         if (Array.isArray(res.data)) {
           setBooks(res.data);
@@ -23,10 +23,10 @@ const Admin = () => {
         console.error(err); // Log the error
       }
     };
-  
+
     fetchBooks();
   }, []);
-  
+
   const showModal = (book = {}) => {
     setCurrentBook(book);
     setIsModalVisible(true);
@@ -35,15 +35,15 @@ const Admin = () => {
   const handleOk = async (updatedBook) => {
     try {
       if (updatedBook._id) {
-        await axios.put(`/api/books/${updatedBook._id}`, updatedBook);
+        await axios.put(`http://localhost:5000/api/books/${updatedBook._id}`, updatedBook); // Ensure this URL is correct
         message.success('Book updated successfully');
       } else {
-        await axios.post('/api/books', updatedBook);
+        await axios.post('http://localhost:5000/api/books', updatedBook); // Ensure this URL is correct
         message.success('Book added successfully');
       }
       setIsModalVisible(false);
       setCurrentBook(null);
-      const res = await axios.get('/api/books');
+      const res = await axios.get('http://localhost:5000/api/books'); // Ensure this URL is correct
       setBooks(res.data);
     } catch (err) {
       message.error('Failed to save book');
@@ -55,6 +55,16 @@ const Admin = () => {
     setCurrentBook(null);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/books/${id}`);
+      message.success('Book deleted successfully');
+      setBooks(books.filter(book => book._id !== id));
+    } catch (err) {
+      message.error('Failed to delete book');
+    }
+  };
+  
   return (
     <div className="p-6">
       <Button type="primary" onClick={() => showModal()}>
@@ -75,7 +85,19 @@ const Admin = () => {
           title="Actions"
           key="actions"
           render={(text, record) => (
-            <Button onClick={() => showModal(record)}>Edit</Button>
+            <div>
+              <Button onClick={() => showModal(record)} style={{ marginRight: '8px' }}>
+                Edit
+              </Button>
+              <Popconfirm
+                title="Are you sure you want to delete this book?"
+                onConfirm={() => handleDelete(record._id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger">Delete</Button>
+              </Popconfirm>
+            </div>
           )}
         />
       </Table>

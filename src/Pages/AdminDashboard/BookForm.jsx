@@ -1,16 +1,45 @@
 import { useState, useEffect } from "react";
-import { Modal, Form, Input, Upload, Button, message, Spin } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, Button, message, Spin } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_tokens;
+const IMG_URL = "https://api.imgbb.com/1/upload";
+const IMG_API_KEY = import.meta.env.VITE_IMG_API_KEY; // Add your ImgBB API key here
 
 const BookForm = ({ book, visible, onOk, onCancel }) => {
-  const { control, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(""); // Added to hold the image URL
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleImage = async (e) => {
+    const image = e.target.files[0];
+    if (image) {
+      try {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("key", IMG_API_KEY);
+
+        const response = await axios.post(IMG_URL, formData);
+        if (response.data && response.data.data && response.data.data.url) {
+          setImageUrl(response.data.data.url);
+        } else {
+          throw new Error("Failed to get image URL.");
+        }
+      } catch (error) {
+        console.log(error);
+        message.error("Failed to upload image.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   useEffect(() => {
     if (book) {
@@ -18,62 +47,33 @@ const BookForm = ({ book, visible, onOk, onCancel }) => {
         title: book.title || "",
         author: book.author || "",
         description: book.description || "",
-        image: book.image || ""
+        image: book.image || "",
       });
-      setImageFile(book.image ? new File([book.image], 'image', { type: 'image/jpeg' }) : null);
-      setImageUrl(book.image || ""); // Initialize imageUrl if book has an image
+      setImageFile(
+        book.image
+          ? new File([book.image], "image", { type: "image/jpeg, image/png" })
+          : null
+      );
+      setImageUrl(book.image || "");
     }
   }, [book, reset]);
-
-  const handleUploadChange = (info) => {
-    if (info.file.status === "done") {
-      setImageFile(info.file.originFileObj);
-    } else if (info.file.status === "error") {
-      message.error("Image upload failed.");
-    }
-  };
-
-  const uploadImage = async (file) => {
-    const formData = new FormData();
-    formData.append("image", file);
-
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
-    const response = await fetch(img_hosting_url, {
-      method: "POST",
-      body: formData,
-    });
-
-    const imgResponse = await response.json();
-
-    if (imgResponse.success) {
-      return imgResponse.data.display_url;
-    } else {
-      throw new Error(imgResponse.error.message);
-    }
-  };
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-
-      let finalImageUrl = imageUrl;
-
-      if (imageFile) {
-        finalImageUrl = await uploadImage(imageFile);
-      }
-
       const updatedBook = {
         ...data,
-        image: finalImageUrl
+        image: imageUrl,
       };
 
       onOk(updatedBook);
     } catch (err) {
-      message.error(`Failed to upload image: ${err.message}`);
+      message.error(`Failed to save book: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <Modal
@@ -92,53 +92,59 @@ const BookForm = ({ book, visible, onOk, onCancel }) => {
           onClick={handleSubmit(onSubmit)}
         >
           Submit
-        </Button>
+        </Button>,
       ]}
     >
       <Form layout="vertical">
-        <Form.Item label="Title" validateStatus={errors.title ? 'error' : ''} help={errors.title?.message}>
+        <Form.Item
+          label="Title"
+          validateStatus={errors.title ? "error" : ""}
+          help={errors.title?.message}
+        >
           <Controller
             name="title"
             control={control}
-            rules={{ required: 'Title is required' }}
+            rules={{ required: "Title is required" }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
-        <Form.Item label="Author" validateStatus={errors.author ? 'error' : ''} help={errors.author?.message}>
+        <Form.Item
+          label="Author"
+          validateStatus={errors.author ? "error" : ""}
+          help={errors.author?.message}
+        >
           <Controller
             name="author"
             control={control}
-            rules={{ required: 'Author is required' }}
+            rules={{ required: "Author is required" }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
-        <Form.Item label="Description" validateStatus={errors.description ? 'error' : ''} help={errors.description?.message}>
+        <Form.Item
+          label="Description"
+          validateStatus={errors.description ? "error" : ""}
+          help={errors.description?.message}
+        >
           <Controller
             name="description"
             control={control}
-            rules={{ required: 'Description is required' }}
+            rules={{ required: "Description is required" }}
             render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
         <Form.Item label="Image">
-          <Controller
-            name="image"
-            control={control}
-            render={({ field }) => (
-              <Upload
-                listType="picture"
-                beforeUpload={() => false} // Prevent automatic upload
-                onChange={handleUploadChange}
-                fileList={imageFile ? [{ uid: '-1', name: 'current image', status: 'done', url: URL.createObjectURL(imageFile) }] : []}
-              >
-                <Button icon={<UploadOutlined />}>Upload Image</Button>
-              </Upload>
-            )}
-          />
+          <input type="file" onChange={handleImage} />
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt="Uploaded preview"
+              style={{ width: "100px", height: "100px", marginTop: "10px" }}
+            />
+          )}
         </Form.Item>
       </Form>
       {loading && (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: "center" }}>
           <Spin />
         </div>
       )}
