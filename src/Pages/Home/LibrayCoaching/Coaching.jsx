@@ -15,10 +15,10 @@ const Coaching = () => {
         5.in dashboard faculty add class,delete class,update class
         6.admin delete,update,create,- student,subject,form,etc etc which need for all action doing here... 
 
-        NB: overall create by step by step Frontend,backend by monogodb,i have already , usercollection schema,usercontroller, make me only for above requirement.. 
+        NB: overall create by step by step Frontend,backend by monogodb,i have already , usercollection schema,usercontroller for login and registration, make me only for above requirement.. 
 
             */}
-<hr />
+
             <div className="bg-gray-100 py-12">
                 <h1  className="text-3xl text-center font-bold mb-8">GianUday Coaching Center</h1>
             </div>

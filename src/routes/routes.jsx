@@ -8,6 +8,7 @@ import UserProfile from "../Pages/UserProfile/UserProfile";
 import BookList from "../Components/BookList";
 import AllUsers from "../Pages/AdminDashboard/AllUsers";
 import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
+import AdminHome from "../Pages/AdminDashboard/AdminHome";
 
 
 const routes = createBrowserRouter([
@@ -20,16 +21,8 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "admin",
-        element: <Admin />,
-      },
-      {
         path: "profile",
         element: <UserProfile />,
-      },
-      {
-        path: "allusers",
-        element: <AllUsers  />,
       },
       {
         path: "bookList",
@@ -41,6 +34,22 @@ const routes = createBrowserRouter([
       }
     ],
   },
+ 
+  {
+    path:"admin",
+    element:<Admin />,
+    children:[
+      {
+        index:true,
+        element:<AdminHome />
+      },
+      {
+        path:"allusers",
+        element:<AllUsers />
+      }
+    ]
+  },
+
   {
     path: "/login",
     element: <Login />,
