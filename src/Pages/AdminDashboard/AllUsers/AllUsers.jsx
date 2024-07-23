@@ -31,15 +31,22 @@ const AllUsers = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card title="All Users" className="w-full max-w-4xl">
+    <div>
+      <h2 className="py-4 mb-2 text-2xl font-bold underline text-center bg-gray-200"> All User's Page</h2>
+    <div className="w-full ">
+      <Card title="All Users" className="w-full ">
         {users.map((user) => (
           <p key={user._id}>
             <strong>Name:</strong> {user.name} | <strong>Email:</strong>{" "}
             {user.email}
+            <button>Delete</button>
+            <button>make Admin</button>
+            <button>make faculty</button>
+
           </p>
         ))}
       </Card>
+    </div>
     </div>
   );
 };

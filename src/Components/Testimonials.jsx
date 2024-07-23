@@ -4,19 +4,20 @@ import { motion } from "framer-motion";
 const testimonials = [
   {
     id: 1,
-    name: "John Doe",
+    name: "Fazly Rabby",
     feedback: "Great library with a vast collection of books.",
   },
   {
     id: 2,
-    name: "Jane Smith",
+    name: "Abdullah",
     feedback: "A wonderful resource for Islamic literature.",
   },
 ];
 
 const Testimonials = () => (
-  <div className="py-12">
-    <h2 className="text-3xl text-center font-bold mb-8">What Our Users Say</h2>
+  <div className="py-12 bg-gray-100">
+    <hr className="my-4"/>
+    <h2 className="text-3xl text-center font-bold mb-8 underline">What Our Users Say</h2>
     <Carousel autoplay>
       {testimonials.map((testimonial) => (
         <motion.div

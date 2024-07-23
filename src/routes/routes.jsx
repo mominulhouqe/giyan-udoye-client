@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Login from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
+import Login from "../Pages/shared/Login/Login";
+import Register from "../Pages/shared/Register/Register";
 import Admin from "../Pages/AdminDashboard/Admin";
 import Home from "../Pages/Home/Home";
-import UserProfile from "../Pages/UserProfile/UserProfile";
+import UserProfile from "../Pages/shared/UserProfile/UserProfile";
 import BookList from "../Components/BookList";
-import AllUsers from "../Pages/AdminDashboard/AllUsers";
+import AllUsers from "../Pages/AdminDashboard/AllUsers/AllUsers";
 import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
 import AdminHome from "../Pages/AdminDashboard/AdminHome";
 

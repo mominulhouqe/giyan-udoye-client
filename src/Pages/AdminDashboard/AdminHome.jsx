@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Table, Button, message, Popconfirm } from "antd";
 import axios from "axios";
-import BookForm from "./BookForm";
+import BookForm from "./DashboardComponent/BookForm";
 const AdminHome = () => {
   const [books, setBooks] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -73,7 +73,8 @@ const AdminHome = () => {
   };
 
   return (
-    <div>
+    <div >
+        <h2 className="py-4 mb-2 text-2xl font-bold underline text-center bg-gray-200"> Books Page</h2>
       <Button type="primary" onClick={() => showModal()}>
         Add Book
       </Button>
