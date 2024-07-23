@@ -2,14 +2,13 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navber";
 
-
 function App() {
   return (
-    <>
-    <Navbar />
+    <div className="container mx-auto">
+      <Navbar  />
 
-  <Outlet></Outlet>
-    </>
+      <Outlet></Outlet>
+    </div>
   );
 }
 

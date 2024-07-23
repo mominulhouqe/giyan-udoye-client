@@ -14,7 +14,7 @@ const Navber = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          message.error("No authentication token found");
+          message.error(message);
           return;
         }
         const response = await axios.get("api/users/profile", {
@@ -41,8 +41,8 @@ const Navber = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div>
-      <Menu mode="horizontal">
+    <div className="sticky top-0  w-full  z-20">
+      <Menu mode="horizontal" className=" bg-gray-200 p-2 border-0 ">
         <Menu.Item key="home">
           <Link to="/">Home</Link>
         </Menu.Item>

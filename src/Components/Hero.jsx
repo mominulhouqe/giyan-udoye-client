@@ -3,12 +3,12 @@ import { Button } from "antd";
 import { motion } from "framer-motion";
 
 const Hero = () => (
-  <div className="bg-blue-500 text-white py-20">
+  <div className="bg-blue-500 text-white py-20 ">
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="container mx-auto text-center"
+      className=" text-center"
     >
       <h1 className="text-5xl font-bold">Welcome to GiyanUdaye</h1>
       <p className="mt-4 text-xl">

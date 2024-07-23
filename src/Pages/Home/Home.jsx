@@ -10,12 +10,12 @@ import Profile from "../Profile/Profile";
 
 const Home = () => {
   return (
-    <div className="p-6">
+    <div className="container mx-auto">
       <Hero />
 
       <Books />
       <FeaturedBooks />
-      <RecentAdditions />
+      {/* <RecentAdditions /> */}
       {/* <LibraryStatistics />
     <Testimonials /> */}
       <Footer />

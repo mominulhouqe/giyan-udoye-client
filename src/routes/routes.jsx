@@ -6,7 +6,8 @@ import Admin from "../Pages/AdminDashboard/Admin";
 import Home from "../Pages/Home/Home";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import BookList from "../Components/BookList";
-import AllUsers from "../Pages/Home/AllUsers";
+import AllUsers from "../Pages/AdminDashboard/AllUsers";
+
 
 const routes = createBrowserRouter([
   {
