@@ -41,9 +41,9 @@ const Navber = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div className="sticky top-0  w-full  z-20">
-      <Menu mode="horizontal" className=" bg-gray-200 p-2 border-0 ">
-        <Menu.Item key="home">
+    <div className="sticky top-0  w-full z-20">
+      <Menu mode="horizontal" className=" bg-gray-200 p-4 border-0 text-lg font-medium">
+        <Menu.Item key="home" >
           <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item key="books">

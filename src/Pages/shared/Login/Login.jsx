@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-lg w-full mx-auto mt-10 border p-6 rounded-md shadow-md">
       <h1 className="text-2xl font-bold mb-6">Login</h1>
       <Form onFinish={onFinish} layout="vertical">
         <Form.Item
@@ -61,6 +61,7 @@ const Login = () => {
             Login
           </Button>
         </Form.Item>
+      <Link to="/register" className="underline hover:text-blue-500">Are you new here?Please Register First !!!</Link>
       </Form>
     </div>
   );

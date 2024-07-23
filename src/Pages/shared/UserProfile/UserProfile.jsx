@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Card, Spin, Button, message } from "antd";
+import { Card, Spin, Button, message, Avatar } from "antd";
 import axios from "axios";
+import Profile from "../Profile/Profile";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -31,9 +33,13 @@ const UserProfile = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card title="User Profile" className="w-full max-w-md">
-        <p>
+    <div className="p-2">
+      <Card title="User Profile" className="w-full max-w-md mx-auto text-center space-y-4 bg-gray-100 ">
+        <Link to="/profile">
+          <Avatar src={user?.profileImage}   className="w-44 h-44 object-cover my-2"/>
+          Profile
+        </Link>
+        <p >
           <strong>Name:</strong> {user?.name}
         </p>
         <p>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button, notification, message } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const IMG_URL = "https://api.imgbb.com/1/upload";
 const IMG_API_KEY = import.meta.env.VITE_IMG_API_KEY;
@@ -59,7 +59,7 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-lg w-full mx-auto mt-10 border rounded-md p-3 shadow-md bg-gray-100">
       <h1 className="text-2xl font-bold mb-6">Register</h1>
       <Form onFinish={onFinish} layout="vertical">
         <Form.Item
@@ -107,6 +107,7 @@ const Register = () => {
             Register
           </Button>
         </Form.Item>
+        <Link to="/login" className="underline hover:text-blue-500">Already have account?</Link>
       </Form>
     </div>
   );
