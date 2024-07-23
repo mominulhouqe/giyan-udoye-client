@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import BookList from "../Components/BookList";
 import AllUsers from "../Pages/AdminDashboard/AllUsers";
+import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
 
 
 const routes = createBrowserRouter([
@@ -34,6 +35,10 @@ const routes = createBrowserRouter([
         path: "bookList",
         element: <BookList />,
       },
+      {
+        path:"coaching",
+        element : <Coaching />
+      }
     ],
   },
   {

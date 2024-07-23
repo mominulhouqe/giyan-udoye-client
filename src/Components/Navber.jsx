@@ -49,6 +49,9 @@ const Navber = () => {
         <Menu.Item key="books">
           <Link to="/bookList">Books</Link>
         </Menu.Item>
+        <Menu.Item key="coaching">
+          <Link to="/coaching">Coaching Center</Link>
+        </Menu.Item>
         {user ? (
           <>
             <Menu.Item key="profile">

@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Table, Button, message, Popconfirm } from "antd";
 import axios from "axios";
 import BookForm from "./BookForm";
+import AddMemberForm from "./AddMemberForm";
 
 const Admin = () => {
   const [books, setBooks] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentBook, setCurrentBook] = useState(null);
-
+  const [addmember, setAddmember] = useState(null);
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -29,6 +30,10 @@ const Admin = () => {
 
   const showModal = (book = {}) => {
     setCurrentBook(book);
+    setIsModalVisible(true);
+  };
+  const showModalAddMember = (member = {}) => {
+    setAddmember(member);
     setIsModalVisible(true);
   };
 
@@ -73,7 +78,12 @@ const Admin = () => {
       <Button type="primary" onClick={() => showModal()}>
         Add Book
       </Button>
+      <Button type="primary" onClick={() => showModalAddMember()}>
+        Add Member
+      </Button>
+
       <Table dataSource={books} rowKey="_id" className="mt-4">
+        
         <Table.Column title="Title" dataIndex="title" key="title" />
         <Table.Column title="Author" dataIndex="author" key="author" />
         <Table.Column
@@ -111,12 +121,45 @@ const Admin = () => {
           )}
         />
       </Table>
+      <hr  className="my-6"/>
+      {/* For add member */}
+      <Table dataSource={addmember} rowKey="_id" className="mt-4">
+        <Table.Column title="Name" dataIndex="name" key="name" />
+        <Table.Column title="Email" dataIndex="email" key="email" />
+        <Table.Column title="Phone" dataIndex="phone" key="phone" />
+    
+        <Table.Column
+          title="Actions"
+          key="actions"
+          render={(text, record) => (
+            <div>
+              <Button
+                onClick={() => showModalAddMember(record)}
+                style={{ marginRight: "8px" }}
+              >
+                Edit
+              </Button>
+              <Popconfirm
+                title="Are you sure you want to delete this book?"
+                onConfirm={() => handleDelete(record._id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger">Delete</Button>
+              </Popconfirm>
+            </div>
+          )}
+        />
+      </Table>
+      
       <BookForm
         book={currentBook}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       />
+     <AddMemberForm />
+      
     </div>
   );
 };

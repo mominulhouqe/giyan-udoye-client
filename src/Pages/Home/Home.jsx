@@ -7,6 +7,7 @@ import RecentAdditions from "../../Components/RecentAdditions";
 import Testimonials from "../../Components/Testimonials";
 import Books from "../Books/Books";
 import Profile from "../Profile/Profile";
+import Coaching from "./LibrayCoaching/Coaching";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       {/* <RecentAdditions /> */}
       {/* <LibraryStatistics />
     <Testimonials /> */}
+
       <Footer />
     </div>
   );
