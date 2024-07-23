@@ -75,11 +75,12 @@ const FeaturedBooks = () => {
         {books.length > 0 ? (
           books.map((book) => (
             <SwiperSlide key={book._id}>
-              <BookCard   
+              <BookCard
                 title={book.title}
                 author={book.author}
                 description={book.description}
-                image={book.image} />
+                image={book.image}
+              />
             </SwiperSlide>
           ))
         ) : (

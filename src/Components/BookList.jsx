@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { List, Card, message } from 'antd';
-import FeatureBookButton from './FeatureBookButton'; // Adjust the import path
-import BookCard from './BookCard';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { List, Card, message } from "antd";
+import FeatureBookButton from "./FeatureBookButton"; // Adjust the import path
+import BookCard from "./BookCard";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -11,7 +11,7 @@ const BookList = () => {
   // Fetch the list of books
   const fetchBooks = async () => {
     try {
-      const response = await axios.get('/api/books');
+      const response = await axios.get("/api/books");
       setBooks(response.data);
     } catch (error) {
       console.error("Failed to fetch books", error);
@@ -49,13 +49,13 @@ const BookList = () => {
                 />
               }
             >
-             <BookCard 
-                 key={book._id}
-                 title={book.title}
-                 author={book.author}
-                 description={book.description}
-                 image={book.image}
-             />
+              <BookCard
+                key={book._id}
+                title={book.title}
+                author={book.author}
+                description={book.description}
+                image={book.image}
+              />
             </Card>
           </List.Item>
         )}

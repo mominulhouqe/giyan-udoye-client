@@ -54,7 +54,6 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
     }
   };
 
-  
   if (loading) return <Spin tip="Loading..." />;
   return (
     <div>

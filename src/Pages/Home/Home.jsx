@@ -9,17 +9,14 @@ import Books from "../Books/Books";
 import Profile from "../Profile/Profile";
 
 const Home = () => {
-
-    
   return (
     <div className="p-6">
-
       <Hero />
 
       <Books />
       <FeaturedBooks />
       <RecentAdditions />
-    {/* <LibraryStatistics />
+      {/* <LibraryStatistics />
     <Testimonials /> */}
       <Footer />
     </div>

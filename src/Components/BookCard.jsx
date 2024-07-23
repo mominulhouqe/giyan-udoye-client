@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card } from 'antd';
+import React from "react";
+import { Card } from "antd";
 
 const BookCard = ({ title, author, description, image }) => {
   return (
@@ -18,11 +18,14 @@ const BookCard = ({ title, author, description, image }) => {
         title={
           <h3 className="text-2xl font-semibold text-blue-500 ">{title}</h3>
         }
-        
         description={
           <div className="text-gray-600">
-            <p><strong>Author:</strong> {author}</p>
-            <p><strong>Description:</strong> {description}</p>
+            <p>
+              <strong>Author:</strong> {author}
+            </p>
+            <p>
+              <strong>Description:</strong> {description}
+            </p>
           </div>
         }
         className="mt-2"

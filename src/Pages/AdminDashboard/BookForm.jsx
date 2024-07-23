@@ -74,7 +74,6 @@ const BookForm = ({ book, visible, onOk, onCancel }) => {
     }
   };
 
-
   return (
     <Modal
       title={book?._id ? "Edit Book" : "Add Book"}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Card, Spin, Button, message } from 'antd';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { Card, Spin, Button, message } from "antd";
+import axios from "axios";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -9,17 +9,17 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
-          message.error('No authentication token found');
+          message.error("No authentication token found");
           return;
         }
-        const response = await axios.get('api/users/profile', {
+        const response = await axios.get("api/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
       } catch (error) {
-        message.error('Failed to fetch user data');
+        message.error("Failed to fetch user data");
       } finally {
         setLoading(false);
       }
@@ -33,8 +33,12 @@ const UserProfile = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card title="User Profile" className="w-full max-w-md">
-        <p><strong>Name:</strong> {user?.name}</p>
-        <p><strong>Email:</strong> {user?.email}</p>
+        <p>
+          <strong>Name:</strong> {user?.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {user?.email}
+        </p>
         <Button type="primary">Edit Profile</Button>
       </Card>
     </div>

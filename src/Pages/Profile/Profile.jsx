@@ -1,27 +1,28 @@
 // src/pages/Profile.js
-import { useState, useEffect } from 'react';
-import { Form, Input, Button, message } from 'antd';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { Form, Input, Button, message } from "antd";
+import axios from "axios";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
   });
 
   useEffect(() => {
     // Fetch user profile data
-    axios.get('/api/users').then(res => setFormData(res.data));
+    axios.get("/api/users").then((res) => setFormData(res.data));
   }, []);
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async () => {
     try {
-      await axios.put('/api/users', formData);
-      message.success('Profile updated successfully');
+      await axios.put("/api/users", formData);
+      message.success("Profile updated successfully");
     } catch (err) {
-      message.error('Failed to update profile');
+      message.error("Failed to update profile");
     }
   };
 

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Table, Button, message, Popconfirm } from 'antd';
-import axios from 'axios';
-import BookForm from './BookForm';
+import { useState, useEffect } from "react";
+import { Table, Button, message, Popconfirm } from "antd";
+import axios from "axios";
+import BookForm from "./BookForm";
 
 const Admin = () => {
   const [books, setBooks] = useState([]);
@@ -11,15 +11,15 @@ const Admin = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/books'); // Ensure this URL is correct
-        console.log('Fetched books:', res.data); // Log the response
+        const res = await axios.get("http://localhost:5000/api/books"); // Ensure this URL is correct
+        console.log("Fetched books:", res.data); // Log the response
         if (Array.isArray(res.data)) {
           setBooks(res.data);
         } else {
-          throw new Error('Expected an array of books');
+          throw new Error("Expected an array of books");
         }
       } catch (err) {
-        message.error('Failed to fetch books');
+        message.error("Failed to fetch books");
         console.error(err); // Log the error
       }
     };
@@ -35,18 +35,21 @@ const Admin = () => {
   const handleOk = async (updatedBook) => {
     try {
       if (updatedBook._id) {
-        await axios.put(`http://localhost:5000/api/books/${updatedBook._id}`, updatedBook); // Ensure this URL is correct
-        message.success('Book updated successfully');
+        await axios.put(
+          `http://localhost:5000/api/books/${updatedBook._id}`,
+          updatedBook
+        ); // Ensure this URL is correct
+        message.success("Book updated successfully");
       } else {
-        await axios.post('http://localhost:5000/api/books', updatedBook); // Ensure this URL is correct
-        message.success('Book added successfully');
+        await axios.post("http://localhost:5000/api/books", updatedBook); // Ensure this URL is correct
+        message.success("Book added successfully");
       }
       setIsModalVisible(false);
       setCurrentBook(null);
-      const res = await axios.get('http://localhost:5000/api/books'); // Ensure this URL is correct
+      const res = await axios.get("http://localhost:5000/api/books"); // Ensure this URL is correct
       setBooks(res.data);
     } catch (err) {
-      message.error('Failed to save book');
+      message.error("Failed to save book");
     }
   };
 
@@ -58,13 +61,13 @@ const Admin = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/books/${id}`);
-      message.success('Book deleted successfully');
-      setBooks(books.filter(book => book._id !== id));
+      message.success("Book deleted successfully");
+      setBooks(books.filter((book) => book._id !== id));
     } catch (err) {
-      message.error('Failed to delete book');
+      message.error("Failed to delete book");
     }
   };
-  
+
   return (
     <div className="p-6">
       <Button type="primary" onClick={() => showModal()}>
@@ -78,7 +81,11 @@ const Admin = () => {
           dataIndex="image"
           key="image"
           render={(text, record) => (
-            <img src={record.image} alt={record.title} style={{ width: '50px', height: '50px' }} />
+            <img
+              src={record.image}
+              alt={record.title}
+              style={{ width: "50px", height: "50px" }}
+            />
           )}
         />
         <Table.Column
@@ -86,7 +93,10 @@ const Admin = () => {
           key="actions"
           render={(text, record) => (
             <div>
-              <Button onClick={() => showModal(record)} style={{ marginRight: '8px' }}>
+              <Button
+                onClick={() => showModal(record)}
+                style={{ marginRight: "8px" }}
+              >
                 Edit
               </Button>
               <Popconfirm

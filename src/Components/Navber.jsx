@@ -1,29 +1,28 @@
-import React from 'react';
+import React from "react";
 import { Menu, Spin, message, Avatar } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useNavigate,  } from "react-router-dom";
-import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Navber = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
-          message.error('No authentication token found');
+          message.error("No authentication token found");
           return;
         }
-        const response = await axios.get('api/users/profile', {
+        const response = await axios.get("api/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
       } catch (error) {
-        message.error('Failed to fetch user data');
+        message.error("Failed to fetch user data");
       } finally {
         setLoading(false);
       }
@@ -33,10 +32,10 @@ const Navber = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    navigate('/login');
-    message.success('Successfully logged out');
+    navigate("/login");
+    message.success("Successfully logged out");
   };
 
   if (loading) return <Spin tip="Loading..." />;
@@ -58,7 +57,7 @@ const Navber = () => {
                 Profile
               </Link>
             </Menu.Item>
-            {user.role === 'admin' && (
+            {user.role === "admin" && (
               <Menu.Item key="admin">
                 <Link to="/admin">Admin</Link>
               </Menu.Item>
@@ -72,7 +71,6 @@ const Navber = () => {
             <Menu.Item key="login">
               <Link to="/login">Login</Link>
             </Menu.Item>
-  
           </>
         )}
       </Menu>
