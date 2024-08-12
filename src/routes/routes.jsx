@@ -9,6 +9,7 @@ import BookList from "../Components/BookList";
 import AllUsers from "../Pages/AdminDashboard/AllUsers/AllUsers";
 import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
 import AdminHome from "../Pages/AdminDashboard/AdminHome";
+import BooksDetails from "../Pages/Home/Books/BooksDetails";
 
 
 const routes = createBrowserRouter([
@@ -29,12 +30,16 @@ const routes = createBrowserRouter([
         element: <BookList />,
       },
       {
+        path:"book-details/:id",
+        element:<BooksDetails />
+      },
+      {
         path:"coaching",
         element : <Coaching />
       }
     ],
   },
- 
+
   {
     path:"admin",
     element:<Admin />,

@@ -1,42 +1,48 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { List, Card, message } from "antd";
 import FeatureBookButton from "./FeatureBookButton"; // Adjust the import path
 import BookCard from "./BookCard";
+import { fetchBooks } from "../redux/slices/booksSlice";
 
 const BookList = () => {
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch the list of books
-  const fetchBooks = async () => {
-    try {
-      const response = await axios.get("/api/books");
-      setBooks(response.data);
-    } catch (error) {
-      console.error("Failed to fetch books", error);
-      message.error("Failed to fetch books");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const { books, loading, error } = useSelector((state) => state.books);
 
   useEffect(() => {
-    fetchBooks();
-  }, []);
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      message.error(error);
+    }
+  }, [error]);
 
   // Callback function to refresh the book list
   const handleBookUpdate = () => {
-    fetchBooks();
+    dispatch(fetchBooks());
   };
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(search.toLowerCase())
+  );
+
 
   return (
-    <div className="py-12 bg-gray-100">
-      <h2 className="text-3xl text-center font-bold mb-8">Book List</h2>
+    <div className="p-6  ">
+      <h2 className="text-4xl text-center font-bold mb-8 underline text-white">Book List</h2>
+      <input
+        type="text"
+        placeholder="Search books"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="mb-6 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+      />
       <List
         loading={loading}
         grid={{ gutter: 12, column: 3 }}
-        dataSource={books}
+        dataSource={filteredBooks}
         renderItem={(book) => (
           <List.Item>
             <Card
@@ -55,6 +61,7 @@ const BookList = () => {
                 author={book.author}
                 description={book.description}
                 image={book.image}
+                id={book._id}
               />
             </Card>
           </List.Item>

@@ -15,9 +15,9 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <div className="py-12 bg-gray-100">
-    <hr className="my-4"/>
+  <div className="py-12 bg-gray-50 bg-opacity-50 m-3 rounded-md">
     <h2 className="text-3xl text-center font-bold mb-8 underline">What Our Users Say</h2>
+
     <Carousel autoplay>
       {testimonials.map((testimonial) => (
         <motion.div

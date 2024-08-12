@@ -4,7 +4,7 @@ import Navbar from "./Components/Navber";
 
 function App() {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto bg-gray-700">
       <Navbar  />
 
       <Outlet></Outlet>

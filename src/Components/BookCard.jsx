@@ -1,8 +1,11 @@
 import React from "react";
 import { Card } from "antd";
+import { Link } from "react-router-dom";
 
-const BookCard = ({ title, author, description, image }) => {
+const BookCard = ({ title, author, description, image ,id}) => {
   return (
+   <div>
+    <Link to={`/book-details/${id}`}>
     <Card
       hoverable
       cover={
@@ -31,6 +34,8 @@ const BookCard = ({ title, author, description, image }) => {
         className="mt-2"
       />
     </Card>
+    </Link>
+   </div>
   );
 };
 

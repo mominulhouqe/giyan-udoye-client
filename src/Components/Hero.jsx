@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { motion } from "framer-motion";
 
 const Hero = () => (
-  <div className="bg-blue-500 text-white py-20 ">
+  <div className=" text-white py-20 ">
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}

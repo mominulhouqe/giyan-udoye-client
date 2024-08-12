@@ -1,58 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import BookCard from "../../../Components/BookCard"; // Adjust import path if needed
+import BookCard from "../../../Components/BookCard";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooks } from "../../../redux/slices/booksSlice";
 
 const Books = () => {
-  const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
 
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { books, loading, error } = useSelector((state) => state.books);
+  
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          message.error("No authentication token found");
-          return;
-        }
-        const response = await axios.get("api/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data);
-      } catch (error) {
-        message.error("Failed to fetch user data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.get("/api/books");
-        setBooks(response.data);
-      } catch (error) {
-        console.error("Failed to fetch books:", error);
-      }
-    };
-
-    fetchBooks();
-  }, []);
+    if (error) {
+      message.error(error);
+    }
+  }, [error]);
 
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="p-6 bg-gray-100 ">
+    <div className="p-6 bg-gray-50 bg-opacity-50 m-3 rounded-md">
       <input
         type="text"
         placeholder="Search books"
@@ -62,15 +37,18 @@ const Books = () => {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredBooks.length > 0 ? (
-          filteredBooks.slice(0, 8).map((book) => (
-            <BookCard
-              key={book._id}
-              title={book.title}
-              author={book.author}
-              description={book.description}
-              image={book.image} // Ensure that your book data includes the image URL
-            />
-          ))
+          filteredBooks
+            .slice(0, 8)
+            .map((book) => (
+              <BookCard
+                key={book._id}
+                title={book.title}
+                author={book.author}
+                description={book.description}
+                image={book.image}
+                id={book._id}
+              />
+            ))
         ) : (
           <p className="text-center col-span-full">No books found</p>
         )}

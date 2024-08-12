@@ -19,9 +19,11 @@ const Coaching = () => {
 
             */}
 
-            <div className="bg-gray-100 py-12">
-                <h1  className="text-3xl text-center font-bold mb-8">GianUday Coaching Center</h1>
-            </div>
+      <div className="bg-gray-100 py-12">
+        <h1 className="text-3xl text-center font-bold mb-8">
+          GianUday Coaching Center
+        </h1>
+      </div>
     </div>
   );
 };

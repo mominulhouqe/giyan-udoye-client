@@ -1,39 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Menu, Spin, message, Avatar } from "antd";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserProfile, logout } from "../redux/slices/authSlice";
 
 const Navber = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          message.error(message);
-          return;
-        }
-        const response = await axios.get("api/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data);
-      } catch (error) {
-        message.error("Failed to fetch user data");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { user, loading, error } = useSelector((state) => state.auth);
 
-    fetchUser();
-  }, []);
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetchUserProfile());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (error) {
+      message.error(error);
+    }
+  }, [error]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+    dispatch(logout());
     navigate("/login");
     message.success("Successfully logged out");
   };
@@ -41,9 +31,9 @@ const Navber = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div className="sticky top-0  w-full z-20">
-      <Menu mode="horizontal" className=" bg-gray-200 p-4 border-0 text-lg font-medium">
-        <Menu.Item key="home" >
+    <div className="sticky top-0 w-full z-20">
+      <Menu mode="horizontal" className="bg-gray-200 p-4 border-0 text-lg font-medium">
+        <Menu.Item key="home">
           <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item key="books">
@@ -70,11 +60,9 @@ const Navber = () => {
             </Menu.Item>
           </>
         ) : (
-          <>
-            <Menu.Item key="login">
-              <Link to="/login">Login</Link>
-            </Menu.Item>
-          </>
+          <Menu.Item key="login">
+            <Link to="/login">Login</Link>
+          </Menu.Item>
         )}
       </Menu>
     </div>

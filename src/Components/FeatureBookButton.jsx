@@ -1,33 +1,19 @@
 import { Button, message, Spin } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// eslint-disable-next-line react/prop-types
 const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { token, isAuthenticated } = useSelector((state) => state.auth);
+  const { user, loading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          message.error("No authentication token found");
-          return;
-        }
-        const response = await axios.get("api/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data);
-      } catch (error) {
-        message.error("Failed to fetch user data");
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (isAuthenticated) {
+      dispatch(fetchUsers(token));
+    }
+  }, [dispatch, isAuthenticated, token]);
 
-    fetchUser();
-  }, []);
 
   const toggleFeatured = async () => {
     try {

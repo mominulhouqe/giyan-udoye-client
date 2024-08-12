@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 // Import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import BookCard from "./BookCard";
+import { Link } from "react-router-dom";
 
 const FeaturedBooks = () => {
   const [books, setBooks] = useState([]);
@@ -42,8 +43,10 @@ const FeaturedBooks = () => {
   }
 
   return (
-    <div className="py-12 bg-gray-100">
-      <h2 className="text-3xl text-center font-bold mb-8 underline">Featured Books</h2>
+    <div className="py-12 bg-gray-50 bg-opacity-50 m-3 rounded-md">
+      <h2 className="text-3xl text-center font-bold mb-8 underline">
+        Featured Books
+      </h2>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -80,6 +83,7 @@ const FeaturedBooks = () => {
                 author={book.author}
                 description={book.description}
                 image={book.image}
+                id={book._id}
               />
             </SwiperSlide>
           ))

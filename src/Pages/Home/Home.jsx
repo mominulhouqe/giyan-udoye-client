@@ -11,13 +11,13 @@ import Coaching from "./LibrayCoaching/Coaching";
 
 const Home = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto ">
       <Hero />
 
       <Books />
       <FeaturedBooks />
-      {/* <RecentAdditions /> */}
-      <LibraryStatistics />
+
+
       <Testimonials />
 
       <Footer />
