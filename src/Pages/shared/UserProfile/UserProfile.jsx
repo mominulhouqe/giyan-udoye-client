@@ -33,11 +33,10 @@ const UserProfile = () => {
   if (loading) return <Spin tip="Loading..." />;
 
   return (
-    <div className="p-2">
-      <Card title="User Profile" className="w-full max-w-md mx-auto text-center space-y-4 bg-gray-100 ">
+    <div className="p-2 flex justify-center items-center h-screen ">
+      <Card title="User Profile" className="w-full max-w-md mx-auto text-center space-y-4 bg-gray-50 bg-opacity-70 ">
         <Link to="/profile">
-          <Avatar src={user?.profileImage}   className="w-44 h-44 object-cover my-2"/>
-          Profile
+          <Avatar src={user?.profileImage}   className="w-44 h-44 object-cover my-2 border rounded-full border-white p-1"/>
         </Link>
         <p >
           <strong>Name:</strong> {user?.name}
