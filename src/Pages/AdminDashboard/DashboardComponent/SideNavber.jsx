@@ -40,10 +40,11 @@ const items = [
     label: "Coaching Management",
     icon: <AppstoreOutlined />,
     children: [
-      { key: "5", label: <NavLink to="coaching-all-student">All Students</NavLink> },
+      { key: "5", label: <NavLink to="class-management">Class-Management</NavLink> },
+      { key: "6c", label: <NavLink to="student-management">Student-Management</NavLink> },
 
-      { key: "7", label:<NavLink to="running-student">Running Sutdent</NavLink> },
-      { key: "7", label:<NavLink to="add-student">Add Sutdent</NavLink> },
+      { key: "7c", label:<NavLink to="subject-management">Subject-Management</NavLink> },
+      { key: "4f", label:<NavLink to="add-student">Add Sutdent</NavLink> },
       { key: "8", label: "Blocked User's" },
 
     ],
