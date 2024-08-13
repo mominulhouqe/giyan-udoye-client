@@ -10,7 +10,7 @@ import AllUsers from "../Pages/AdminDashboard/AllUsers/AllUsers";
 import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
 import AdminHome from "../Pages/AdminDashboard/AdminHome";
 import BooksDetails from "../Pages/Home/Books/BooksDetails";
-import ManageClasses from "../Pages/AdminDashboard/CoachingManagement/ManageClasses/ManageClasses";
+// import ManageClasses from "../Pages/AdminDashboard/CoachingManagement/ManageClasses/ManageClasses";
 import ManageStudents from "../Pages/AdminDashboard/CoachingManagement/ManageStudent/ManageStudent";
 import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSubject/ManageSubjects";
 
@@ -56,10 +56,10 @@ const routes = createBrowserRouter([
         path:"allusers",
         element:<AllUsers />
       },
-      {
-        path:"class-management",
-        element:<ManageClasses />
-      },
+      // {
+      //   path:"class-management",
+      //   element:<ManageClasses />
+      // },
       {
         path:"student-management",
         element:<ManageStudents />

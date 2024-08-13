@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Input, Button, List, Alert, Form, Space } from "antd";
+import { DeleteOutlined } from '@ant-design/icons';
 
 const ManageSubjects = () => {
   const [subjects, setSubjects] = useState([]);
@@ -15,6 +17,7 @@ const ManageSubjects = () => {
     },
     availableSeats: ""
   });
+  const [alert, setAlert] = useState({ type: '', message: '', visible: false });
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -22,6 +25,7 @@ const ManageSubjects = () => {
         const response = await axios.get("http://localhost:5000/api/subjects");
         setSubjects(response.data);
       } catch (error) {
+        setAlert({ type: 'error', message: 'Failed to fetch subjects!', visible: true });
         console.error("Failed to fetch subjects", error);
       }
     };
@@ -63,10 +67,11 @@ const ManageSubjects = () => {
         },
         availableSeats: ""
       });
-      // Refresh the list
       const response = await axios.get("http://localhost:5000/api/subjects");
       setSubjects(response.data);
+      setAlert({ type: 'success', message: 'Subject added successfully!', visible: true });
     } catch (error) {
+      setAlert({ type: 'error', message: 'Failed to add subject!', visible: true });
       console.error("Failed to add subject", error);
     }
   };
@@ -74,10 +79,11 @@ const ManageSubjects = () => {
   const handleDeleteSubject = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/subjects/${id}`);
-      // Refresh the list
       const response = await axios.get("http://localhost:5000/api/subjects");
       setSubjects(response.data);
+      setAlert({ type: 'success', message: 'Subject deleted successfully!', visible: true });
     } catch (error) {
+      setAlert({ type: 'error', message: 'Failed to delete subject!', visible: true });
       console.error("Failed to delete subject", error);
     }
   };
@@ -85,96 +91,126 @@ const ManageSubjects = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Manage Subjects</h1>
-      <div className="mb-4">
-        <input
-          type="text"
-          name="className"
-          value={newSubject.className}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Class Name"
+
+      {alert.visible && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          showIcon
+          closable
+          onClose={() => setAlert({ ...alert, visible: false })}
+          className="mb-4"
         />
-        <input
-          type="text"
-          name="subjectName"
-          value={newSubject.subjectName}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Subject Name"
-        />
-        <input
-          type="text"
-          name="instructor"
-          value={newSubject.instructor}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Instructor"
-        />
-        <input
-          type="text"
-          name="duration"
-          value={newSubject.duration}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Duration"
-        />
-        <input
-          type="number"
-          name="rating"
-          value={newSubject.rating}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Rating"
-        />
-        <input
-          type="email"
-          name="email"
-          value={newSubject.contact.email}
-          onChange={handleContactChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Contact Email"
-        />
-        <input
-          type="text"
-          name="phone"
-          value={newSubject.contact.phone}
-          onChange={handleContactChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Contact Phone"
-        />
-        <input
-          type="number"
-          name="availableSeats"
-          value={newSubject.availableSeats}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Available Seats"
-        />
-        <button onClick={handleAddSubject} className="bg-blue-500 text-white p-2 rounded">
+      )}
+
+      <Form layout="vertical" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+        <Form.Item label="Class Name">
+          <Input
+            name="className"
+            value={newSubject.className}
+            onChange={handleInputChange}
+            placeholder="Enter class name"
+          />
+        </Form.Item>
+        <Form.Item label="Subject Name">
+          <Input
+            name="subjectName"
+            value={newSubject.subjectName}
+            onChange={handleInputChange}
+            placeholder="Enter subject name"
+          />
+        </Form.Item>
+        <Form.Item label="Instructor">
+          <Input
+            name="instructor"
+            value={newSubject.instructor}
+            onChange={handleInputChange}
+            placeholder="Enter instructor name"
+          />
+        </Form.Item>
+        <Form.Item label="Duration">
+          <Input
+            name="duration"
+            value={newSubject.duration}
+            onChange={handleInputChange}
+            placeholder="Enter duration"
+          />
+        </Form.Item>
+        <Form.Item label="Rating">
+          <Input
+            name="rating"
+            value={newSubject.rating}
+            onChange={handleInputChange}
+            placeholder="Enter rating"
+            type="number"
+          />
+        </Form.Item>
+        <Form.Item label="Contact Email">
+          <Input
+            name="email"
+            value={newSubject.contact.email}
+            onChange={handleContactChange}
+            placeholder="Enter contact email"
+            type="email"
+          />
+        </Form.Item>
+        <Form.Item label="Contact Phone">
+          <Input
+            name="phone"
+            value={newSubject.contact.phone}
+            onChange={handleContactChange}
+            placeholder="Enter contact phone"
+          />
+        </Form.Item>
+        <Form.Item label="Available Seats">
+          <Input
+            name="availableSeats"
+            value={newSubject.availableSeats}
+            onChange={handleInputChange}
+            placeholder="Enter available seats"
+            type="number"
+          />
+        </Form.Item>
+        <Button type="primary" onClick={handleAddSubject}>
           Add Subject
-        </button>
-      </div>
-      <ul className="mt-4">
-        {subjects.map((subject) => (
-          <li key={subject._id} className="mb-2 flex items-center bg-gray-200 p-2 rounded-md ">
-            <div className="flex-1">
-              <strong>{subject.className} - {subject.subjectName}</strong><br />
-              Instructor: {subject.instructor}<br />
-              Duration: {subject.duration}<br />
-              Rating: {subject.rating}<br />
-              Contact Email: {subject.contact.email}<br />
-              Contact Phone: {subject.contact.phone}<br />
-              Available Seats: {subject.availableSeats}
-            </div>
-            <button
-              onClick={() => handleDeleteSubject(subject._id)}
-              className="bg-red-500 text-white p-2 ml-4 rounded"
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+        </Button>
+      </Form>
+
+      <List
+        className="mt-4 "
+        itemLayout="horizontal"
+        dataSource={subjects}
+        renderItem={subject => (
+          <List.Item
+          className="bg-gray-100  rounded-md my-2"
+            actions={[
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() => handleDeleteSubject(subject._id)}
+              >
+                Delete
+              </Button>
+            ]}
+          >
+            <List.Item.Meta
+            className="p-2"
+              title={`${subject.className} - ${subject.subjectName}`}
+              description={
+                <Space direction="vertical" className="">
+                  <span>Instructor: {subject.instructor}</span>
+                  <span>Duration: {subject.duration}</span>
+                  <span>Rating: {subject.rating}</span>
+                  <span>Contact Email: {subject.contact.email}</span>
+                  <span>Contact Phone: {subject.contact.phone}</span>
+                  <span>Available Seats: {subject.availableSeats}</span>
+                </Space>
+              }
+            />
+          </List.Item>
+        )}
+      />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Input, Button, List, Avatar, Alert, Space, Form } from "antd";
+import { UserOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const ManageStudents = () => {
   const [students, setStudents] = useState([]);
@@ -9,8 +11,9 @@ const ManageStudents = () => {
     phone: "",
     image: "",
     batchName: "",
-    subjectName: ""
+    subjectName: "",
   });
+  const [alert, setAlert] = useState({ type: "", message: "", visible: false });
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -39,12 +42,21 @@ const ManageStudents = () => {
         phone: "",
         image: "",
         batchName: "",
-        subjectName: ""
+        subjectName: "",
       });
-      // Refresh the list
       const response = await axios.get("http://localhost:5000/api/students");
       setStudents(response.data);
+      setAlert({
+        type: "success",
+        message: "Student added successfully!",
+        visible: true,
+      });
     } catch (error) {
+      setAlert({
+        type: "error",
+        message: "Failed to add student!",
+        visible: true,
+      });
       console.error("Failed to add student", error);
     }
   };
@@ -52,10 +64,19 @@ const ManageStudents = () => {
   const handleDeleteStudent = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/students/${id}`);
-      // Refresh the list
       const response = await axios.get("http://localhost:5000/api/students");
       setStudents(response.data);
+      setAlert({
+        type: "success",
+        message: "Student deleted successfully!",
+        visible: true,
+      });
     } catch (error) {
+      setAlert({
+        type: "error",
+        message: "Failed to delete student!",
+        visible: true,
+      });
       console.error("Failed to delete student", error);
     }
   };
@@ -63,79 +84,104 @@ const ManageStudents = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Manage Students</h1>
-      <div className="mb-4">
-        <input
-          type="text"
-          name="name"
-          value={newStudent.name}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Name"
+
+      {alert.visible && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          showIcon
+          closable
+          onClose={() => setAlert({ ...alert, visible: false })}
+          className="mb-4"
         />
-        <input
-          type="email"
-          name="email"
-          value={newStudent.email}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Email"
-        />
-        <input
-          type="text"
-          name="phone"
-          value={newStudent.phone}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Phone"
-        />
-        <input
-          type="text"
-          name="image"
-          value={newStudent.image}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Image URL"
-        />
-        <input
-          type="text"
-          name="batchName"
-          value={newStudent.batchName}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Batch Name"
-        />
-        <input
-          type="text"
-          name="subjectName"
-          value={newStudent.subjectName}
-          onChange={handleInputChange}
-          className="border p-2 mb-2 w-full"
-          placeholder="Subject Name"
-        />
-        <button onClick={handleAddStudent} className="bg-blue-500 text-white p-2 rounded">
+      )}
+
+      <Form
+        layout="vertical"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 place-content-center"
+      >
+        <Form.Item label="Name">
+          <Input
+            name="name"
+            value={newStudent.name}
+            onChange={handleInputChange}
+            placeholder="Enter student name"
+            prefix={<UserOutlined />}
+          />
+        </Form.Item>
+        <Form.Item label="Email">
+          <Input
+            name="email"
+            value={newStudent.email}
+            onChange={handleInputChange}
+            placeholder="Enter student email"
+            type="email"
+          />
+        </Form.Item>
+        <Form.Item label="Phone">
+          <Input
+            name="phone"
+            value={newStudent.phone}
+            onChange={handleInputChange}
+            placeholder="Enter student phone"
+          />
+        </Form.Item>
+        <Form.Item label="Image URL">
+          <Input
+            name="image"
+            value={newStudent.image}
+            onChange={handleInputChange}
+            placeholder="Enter image URL"
+          />
+        </Form.Item>
+        <Form.Item label="Batch Name">
+          <Input
+            name="batchName"
+            value={newStudent.batchName}
+            onChange={handleInputChange}
+            placeholder="Enter batch name"
+          />
+        </Form.Item>
+        <Form.Item label="Subject Name">
+          <Input
+            name="subjectName"
+            value={newStudent.subjectName}
+            onChange={handleInputChange}
+            placeholder="Enter subject name"
+          />
+        </Form.Item>
+        <Button type="primary" onClick={handleAddStudent}>
           Add Student
-        </button>
-      </div>
-      <ul className="mt-4">
-        {students.map((student) => (
-          <li key={student._id} className="mb-2 flex items-center">
-            <div className="flex-1">
-              <strong>{student.name}</strong><br />
-              Email: {student.email}<br />
-              Phone: {student.phone}<br />
-              Image: <img src={student.image} alt={student.name} className="w-20 h-20 object-cover"/><br />
-              Batch: {student.batchName}<br />
-              Subject: {student.subjectName}
-            </div>
-            <button
-              onClick={() => handleDeleteStudent(student._id)}
-              className="bg-red-500 text-white p-2 ml-4 rounded"
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+        </Button>
+      </Form>
+
+      <List
+        className="mt-4"
+        itemLayout="horizontal"
+        dataSource={students}
+        renderItem={(student) => (
+          <List.Item
+            className="bg-gray-100  rounded-md my-2 "
+            actions={[
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() => handleDeleteStudent(student._id)}
+              >
+                Delete
+              </Button>,
+            ]}
+          >
+            <List.Item.Meta
+              className="p-2"
+              avatar={<Avatar src={student.image} />}
+              title={student.name}
+              description={`Email: ${student.email} | Phone: ${student.phone} | Batch: ${student.batchName} | Subject: ${student.subjectName}`}
+            />
+          </List.Item>
+        )}
+      />
     </div>
   );
 };

@@ -40,7 +40,7 @@ const items = [
     label: "Coaching Management",
     icon: <AppstoreOutlined />,
     children: [
-      { key: "5", label: <NavLink to="class-management">Class-Management</NavLink> },
+      // { key: "5", label: <NavLink to="class-management">Class-Management</NavLink> },
       { key: "6c", label: <NavLink to="student-management">Student-Management</NavLink> },
 
       { key: "7c", label:<NavLink to="subject-management">Subject-Management</NavLink> },
@@ -75,7 +75,7 @@ const SideNavbar = () => {
 
   return (
     <>
-      <div className="w-full lg:w-72 lg:min-h-screen bg-gray-200 border-r border-gray-200 shadow-md">
+      <div className="lg:min-h-screen bg-gray-200 border-r border-gray-200 shadow-md">
         {/* Mobile Menu Button */}
         <div className="lg:hidden p-4">
           <Button type="primary" onClick={showDrawer}>
