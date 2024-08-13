@@ -25,34 +25,33 @@ const BooksDetails = () => {
 
         fetchBookDetails();
     }, [id]);
-  
 
     if (loading) {
         return <Spin className="block mx-auto mt-20" />;
     }
 
     if (!book) {
-        return <div className="text-center mt-20">Book not found</div>;
+        return <div className="text-center mt-20 text-lg text-gray-600">Book not found</div>;
     }
 
     return (
-        <div className="container mx-auto p-6  lg:p-12 bg-gradient-to-b from-white to-gray-50 shadow-lg rounded-xl">
+        <div className="container mx-auto p-6 lg:p-12  shadow-lg rounded-xl">
             {/* Book Cover and Details */}
-            <div className="grid grid-col-span-2 md:grid-cols-3 gap-2 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <img
                     src={book.image}
                     alt={book.title}
-                    className="max-w-sm w-full rounded-lg shadow-lg mb-6 lg:mb-0 transition-transform transform hover:scale-105 "
+                    className="w-full max-h-[500px] object-fill max-w-sm rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
                 />
-                <div className="lg:ml-10  md:col-span-2 text-center lg:text-left bg-gray-50 px-5">
-                    <h1 className="text-4xl font-bold text-gray-900">{book.title}</h1>
-                    <p className="text-xl text-gray-600 mt-2">by {book.author}</p>
-                    <p className="text-gray-700 mt-4 leading-relaxed">{book.description}</p>
-                    <div className="mt-6 flex items-center justify-center lg:justify-start space-x-2">
+                <div className="md:col-span-2 text-center md:text-left bg-white p-6 rounded-lg shadow-md">
+                    <h1 className="text-4xl font-bold text-gray-800 mb-2">{book.title}</h1>
+                    <p className="text-xl text-gray-600 mb-4">by {book.author}</p>
+                    <p className="text-gray-800 mb-4 leading-relaxed">{book.description}</p>
+                    <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
                         <Rate disabled defaultValue={book.averageRating} />
-                        <span className="ml-2 text-gray-700">({book.averageRating} / 5)</span>
+                        <span className="text-gray-700 ml-2">({book.averageRating} / 5)</span>
                     </div>
-                    <div className="mt-4 flex flex-wrap justify-center lg:justify-start space-x-2">
+                    <div className="flex flex-wrap justify-center md:justify-start space-x-2">
                         {book.genre && (
                             <Tag color="blue" className="text-base font-medium">
                                 {book.genre}
@@ -68,16 +67,15 @@ const BooksDetails = () => {
             {/* Reviews Section */}
             <div className="mt-12">
                 <h2 className="text-3xl font-semibold text-gray-800 mb-6">User Reviews</h2>
-                {/* Placeholder for reviews */}
-                <div className="bg-white p-6 rounded-lg shadow-inner space-y-4">
-                    <p className="text-gray-500">No reviews yet. Be the first to review this book!</p>
+                <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+                    <p className="text-gray-600">No reviews yet. Be the first to review this book!</p>
                 </div>
             </div>
 
             {/* Review Form Section */}
             <div className="mt-12">
                 <h2 className="text-3xl font-semibold text-gray-800 mb-6">Write a Review</h2>
-                <div className="bg-white p-6 rounded-lg shadow-inner">
+                <div className="bg-white p-6 rounded-lg shadow-md">
                     {/* ReviewForm component would be rendered here */}
                     <ReviewForm />
                 </div>

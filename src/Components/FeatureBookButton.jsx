@@ -1,20 +1,37 @@
 import { Button, message, Spin } from "antd";
 import axios from "axios";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 
 const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
-  const dispatch = useDispatch();
-  const { token, isAuthenticated } = useSelector((state) => state.auth);
-  const { user, loading, error } = useSelector((state) => state.users);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUsers(token));
-    }
-  }, [dispatch, isAuthenticated, token]);
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+        console.log(error.message);
+        ;
+          return;
+        }
+        const response = await axios.get("api/users/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data);
+      } catch (error) {
+      console.log(error.message);
+      ;
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchUser();
+  }, []);
 
+  if (loading) return <Spin tip="Loading..." />;
   const toggleFeatured = async () => {
     try {
       // Toggle the feature status of the book

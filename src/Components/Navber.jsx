@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserProfile, logout } from "../redux/slices/authSlice";
 import { HomeOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
-
+import logo from '../assets/logo.jpeg'
 const Navber = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,17 +40,18 @@ const Navber = () => {
     <div className="sticky top-0 w-full z-20 bg-[#D2B48C] shadow-lg">
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="flex items-center space-x-4">
-          <Link to="/" className="text-white text-2xl font-bold flex items-center space-x-2">
-            <HomeOutlined className="text-white" />
-            <span>MyWebsite</span>
+          <Link to="/" className="text-white text-3xl font-bold flex items-center space-x-2">
+            <img src={logo} alt="Logo" className="w-12 h-12 rounded-full"/>
+            <span>GiyanUdaye</span>
           </Link>
         </div>
         <div className="hidden md:flex flex-grow justify-center items-center space-x-4 text-white">
-          <Menu mode="horizontal" className="bg-transparent  w-full border-0 text-white text-lg font-semibold">
+          <Menu mode="horizontal" className="bg-transparent md:ml-10 w-full border-0 text-white text-lg font-semibold">
             <Menu.Item key="home" className="text-white">
               <Link to="/" >Home</Link>
             </Menu.Item>
             <Menu.Item key="books" className="">
+             
               <Link to="/bookList">Books</Link>
             </Menu.Item>
             <Menu.Item key="coaching" className="">
