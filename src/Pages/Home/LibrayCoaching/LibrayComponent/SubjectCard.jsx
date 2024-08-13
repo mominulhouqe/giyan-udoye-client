@@ -6,9 +6,6 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 
 const SubjectCard = ({ subject }) => {
-  console.log(
-    subject
-  );
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
