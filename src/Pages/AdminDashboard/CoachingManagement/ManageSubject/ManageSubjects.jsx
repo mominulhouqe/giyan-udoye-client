@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Input, Button, List, Alert, Form, Space } from "antd";
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from "@ant-design/icons";
 
 const ManageSubjects = () => {
   const [subjects, setSubjects] = useState([]);
   const [newSubject, setNewSubject] = useState({
     className: "",
     subjectName: "",
+    image: "",
     instructor: "",
     duration: "",
     rating: "",
     contact: {
       email: "",
-      phone: ""
+      phone: "",
     },
-    availableSeats: ""
+    availableSeats: "",
   });
-  const [alert, setAlert] = useState({ type: '', message: '', visible: false });
+  const [alert, setAlert] = useState({ type: "", message: "", visible: false });
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -25,7 +26,11 @@ const ManageSubjects = () => {
         const response = await axios.get("http://localhost:5000/api/subjects");
         setSubjects(response.data);
       } catch (error) {
-        setAlert({ type: 'error', message: 'Failed to fetch subjects!', visible: true });
+        setAlert({
+          type: "error",
+          message: "Failed to fetch subjects!",
+          visible: true,
+        });
         console.error("Failed to fetch subjects", error);
       }
     };
@@ -35,20 +40,20 @@ const ManageSubjects = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewSubject(prev => ({
+    setNewSubject((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleContactChange = (e) => {
     const { name, value } = e.target;
-    setNewSubject(prev => ({
+    setNewSubject((prev) => ({
       ...prev,
       contact: {
         ...prev.contact,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -60,18 +65,27 @@ const ManageSubjects = () => {
         subjectName: "",
         instructor: "",
         duration: "",
+        image: "",
         rating: "",
         contact: {
           email: "",
-          phone: ""
+          phone: "",
         },
-        availableSeats: ""
+        availableSeats: "",
       });
       const response = await axios.get("http://localhost:5000/api/subjects");
       setSubjects(response.data);
-      setAlert({ type: 'success', message: 'Subject added successfully!', visible: true });
+      setAlert({
+        type: "success",
+        message: "Subject added successfully!",
+        visible: true,
+      });
     } catch (error) {
-      setAlert({ type: 'error', message: 'Failed to add subject!', visible: true });
+      setAlert({
+        type: "error",
+        message: "Failed to add subject!",
+        visible: true,
+      });
       console.error("Failed to add subject", error);
     }
   };
@@ -81,9 +95,17 @@ const ManageSubjects = () => {
       await axios.delete(`http://localhost:5000/api/subjects/${id}`);
       const response = await axios.get("http://localhost:5000/api/subjects");
       setSubjects(response.data);
-      setAlert({ type: 'success', message: 'Subject deleted successfully!', visible: true });
+      setAlert({
+        type: "success",
+        message: "Subject deleted successfully!",
+        visible: true,
+      });
     } catch (error) {
-      setAlert({ type: 'error', message: 'Failed to delete subject!', visible: true });
+      setAlert({
+        type: "error",
+        message: "Failed to delete subject!",
+        visible: true,
+      });
       console.error("Failed to delete subject", error);
     }
   };
@@ -103,13 +125,24 @@ const ManageSubjects = () => {
         />
       )}
 
-      <Form layout="vertical" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+      <Form
+        layout="vertical"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2"
+      >
         <Form.Item label="Class Name">
           <Input
             name="className"
             value={newSubject.className}
             onChange={handleInputChange}
             placeholder="Enter class name"
+          />
+        </Form.Item>
+        <Form.Item label="Image URL">
+          <Input
+            name="image"
+            value={newSubject.image}
+            onChange={handleInputChange}
+            placeholder="Enter image URL"
           />
         </Form.Item>
         <Form.Item label="Subject Name">
@@ -180,9 +213,9 @@ const ManageSubjects = () => {
         className="mt-4 "
         itemLayout="horizontal"
         dataSource={subjects}
-        renderItem={subject => (
+        renderItem={(subject) => (
           <List.Item
-          className="bg-gray-100  rounded-md my-2"
+            className="bg-gray-100  rounded-md my-2"
             actions={[
               <Button
                 type="primary"
@@ -191,14 +224,15 @@ const ManageSubjects = () => {
                 onClick={() => handleDeleteSubject(subject._id)}
               >
                 Delete
-              </Button>
+              </Button>,
             ]}
           >
             <List.Item.Meta
-            className="p-2"
+              className="p-2"
               title={`${subject.className} - ${subject.subjectName}`}
               description={
                 <Space direction="vertical" className="">
+                  <img src={subject.image} alt="" className="w-24" />
                   <span>Instructor: {subject.instructor}</span>
                   <span>Duration: {subject.duration}</span>
                   <span>Rating: {subject.rating}</span>

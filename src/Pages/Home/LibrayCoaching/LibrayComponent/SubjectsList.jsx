@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SubjectCard from "../../../../Components/SubjectCard";
+import SubjectCard from "./SubjectCard";
+
 
 const SubjectsList = () => {
   const [subjects, setSubjects] = useState([]);
@@ -17,11 +18,11 @@ const SubjectsList = () => {
 
     fetchSubjects();
   }, []);
-
+  
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Coaching Subjects</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <h2 className="text-4xl text-center text-white font-bold mb-4">Coaching Subjects</h2>
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {subjects.map((subject) => (
           <SubjectCard key={subject._id} subject={subject} />
         ))}

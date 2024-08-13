@@ -1,29 +1,45 @@
 import React from "react";
+import CoachingHero from "./LibrayComponent/CoachingHero";
+import CoachingTestimionial from "./LibrayComponent/CoachingTestimionial";
+import ContactForm from "./LibrayComponent/ContactForm";
+import SubjectsList from "./LibrayComponent/SubjectsList";
 
 const Coaching = () => {
   return (
     <div>
-      {/* 
-                 Todo :
-            1.coaching subject's list by class Name,example class-10, subject-English,insturctor-abu bakkar, duration-2 hour,rating,contact-email:gainuday@gmail.com or phone 01999999,avialble seat..make a card .. 
-        
-        2. coaching tutor's seeing subject wise, with profession name
-        3.running students and prviews student list,with name,image,batch name,subject name , 
-        //add more feature for those, overall step by step with reusable component,
-        
-        4.For all, make admin dashboard
-        5.in dashboard faculty add class,delete class,update class
-        6.admin delete,update,create,- student,subject,form,etc etc which need for all action doing here... 
+      <CoachingHero />
+<SubjectsList />
+      {/* Coaching Programs */}
+      {/* <div className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-center">Our Coaching Programs</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Card
+            hoverable
+            cover={<img alt="program1" src="https://example.com/program1.jpg" />}
+            className="shadow-lg"
+          >
+            <Card.Meta title="Program 1" description="Detailed description of Program 1" />
+          </Card>
+          <Card
+            hoverable
+            cover={<img alt="program2" src="https://example.com/program2.jpg" />}
+            className="shadow-lg"
+          >
+            <Card.Meta title="Program 2" description="Detailed description of Program 2" />
+          </Card>
+          <Card
+            hoverable
+            cover={<img alt="program3" src="https://example.com/program3.jpg" />}
+            className="shadow-lg"
+          >
+            <Card.Meta title="Program 3" description="Detailed description of Program 3" />
+          </Card>
+        </div>
+      </div> */}
 
-        NB: overall create by step by step Frontend,backend by monogodb,i have already , usercollection schema,usercontroller for login and registration, make me only for above requirement.. 
-
-            */}
-
-      <div className="bg-gray-100 py-12">
-        <h1 className="text-3xl text-center font-bold mb-8">
-          GianUday Coaching Center
-        </h1>
-      </div>
+      <CoachingTestimionial />
+      {/* Contact Form */}
+      <ContactForm />
     </div>
   );
 };
