@@ -19,13 +19,15 @@ const DonationPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">Donate to GiyanUday Islamic Library</h1>
-      <p className="text-center mb-8 text-lg text-gray-600">
+    <div className="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 text-white">
+      <div>
+      <h1 className="text-5xl font-bold text-center mb-6 ">Donate to GiyanUday Islamic Library</h1>
+      <p className="text-center mb-8 text-lg text-gray-200">
         Your donations help us continue our mission of providing free access to Islamic literature and resources.
       </p>
+      </div>
 
-      <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+      <div className="max-w-lg  w-full mx-auto bg-white p-8 rounded-lg shadow-md">
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item
             label="Name"

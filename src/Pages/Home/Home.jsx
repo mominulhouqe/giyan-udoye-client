@@ -1,3 +1,4 @@
+import DonationPage from "../../Components/DonationPage";
 import FeaturedBooks from "../../Components/FeaturedBooks";
 import Footer from "../../Components/Footer";
 import Hero from "../../Components/Hero";
@@ -15,6 +16,7 @@ const Home = () => {
 
 
       <Testimonials />
+      <DonationPage />
 
       <Footer />
     </div>
