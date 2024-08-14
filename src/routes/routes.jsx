@@ -15,6 +15,7 @@ import ManageStudents from "../Pages/AdminDashboard/CoachingManagement/ManageStu
 import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSubject/ManageSubjects";
 import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/ManageTutor";
 import AuthenticatedRoute from "./AuthenticatedRoute";
+import LibraryMemberManagement from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberManagement";
 
 const routes = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const routes = createBrowserRouter([
       {
         path: "allusers",
         element: <AllUsers />,
+      },
+      {
+        path:"library-member",
+        element:<LibraryMemberManagement />
       },
       // {
       //   path:"class-management",
