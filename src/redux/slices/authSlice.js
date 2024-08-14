@@ -9,7 +9,7 @@ export const fetchUserProfile = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        return rejectWithValue("No token found");
+        return rejectWithValue("");
       }
       const response = await axios.get("http://localhost:5000/api/users/profile", {
         headers: { Authorization: `Bearer ${token}` },

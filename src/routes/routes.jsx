@@ -14,7 +14,7 @@ import BooksDetails from "../Pages/Home/Books/BooksDetails";
 import ManageStudents from "../Pages/AdminDashboard/CoachingManagement/ManageStudent/ManageStudent";
 import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSubject/ManageSubjects";
 import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/ManageTutor";
-
+import AuthenticatedRoute from "./AuthenticatedRoute";
 
 const routes = createBrowserRouter([
   {
@@ -31,49 +31,54 @@ const routes = createBrowserRouter([
       },
       {
         path: "bookList",
-        element: <BookList />,
+        element:<AuthenticatedRoute>
+           <BookList />
+        </AuthenticatedRoute>,
       },
       {
-        path:"book-details/:id",
-        element:<BooksDetails />
+        path: "book-details/:id",
+        element: <BooksDetails />
+    
       },
       {
-        path:"coaching",
-        element : <Coaching />
-      }
+        path: "coaching",
+        element: <Coaching />,
+      },
     ],
   },
 
   {
-    path:"admin",
-    element:<Admin />,
-    children:[
+    path: "admin",
+    element: <AuthenticatedRoute>
+      <Admin />
+    </AuthenticatedRoute>,
+    children: [
       {
-        index:true,
-        element:<AdminHome />
+        index: true,
+        element: <AdminHome />,
       },
-    
+
       {
-        path:"allusers",
-        element:<AllUsers />
+        path: "allusers",
+        element: <AllUsers />,
       },
       // {
       //   path:"class-management",
       //   element:<ManageClasses />
       // },
       {
-        path:"student-management",
-        element:<ManageStudents />
+        path: "student-management",
+        element: <ManageStudents />,
       },
       {
-        path:"subject-management",
-        element:<ManageSubjects />
+        path: "subject-management",
+        element: <ManageSubjects />,
       },
       {
-        path:"tutor-management",
-        element:<ManageTutor />
-      }
-    ]
+        path: "tutor-management",
+        element: <ManageTutor />,
+      },
+    ],
   },
 
   {

@@ -17,8 +17,6 @@ const Home = () => {
 
       <Testimonials />
       <DonationPage />
-
-      <Footer />
     </div>
   );
 };
