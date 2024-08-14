@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "../../../Components/BookCard";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../../redux/slices/booksSlice";
 
 const Books = () => {
   const [search, setSearch] = useState("");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { books, loading, error } = useSelector((state) => state.books);
-  
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
@@ -26,6 +26,16 @@ const Books = () => {
     book.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleSeeAllClick = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/bookList");
+    }
+  };
+  if (loading) {
+    return <Spin tip="Loading..."></Spin>;
+  }
   return (
     <div className="p-6 bg-gray-50 bg-opacity-50 m-3 rounded-md">
       <input
@@ -53,9 +63,9 @@ const Books = () => {
           <p className="text-center col-span-full">No books found</p>
         )}
       </div>
-      <Link to="bookList" className="flex justify-end my-3">
-        <Button>See all</Button>
-      </Link>
+      <div className="flex justify-end my-3">
+        <Button onClick={handleSeeAllClick}>See all</Button>
+      </div>
 
       <hr />
     </div>
