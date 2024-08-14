@@ -3,6 +3,7 @@ import CoachingHero from "./LibrayComponent/CoachingHero";
 import CoachingTestimionial from "./LibrayComponent/CoachingTestimionial";
 import ContactForm from "./LibrayComponent/ContactForm";
 import SubjectsList from "./LibrayComponent/SubjectsList";
+import TutorsList from "./LibrayComponent/TutorsList";
 
 const Coaching = () => {
   return (
@@ -36,6 +37,7 @@ const Coaching = () => {
           </Card>
         </div>
       </div> */}
+<TutorsList />
 
       <CoachingTestimionial />
       {/* Contact Form */}

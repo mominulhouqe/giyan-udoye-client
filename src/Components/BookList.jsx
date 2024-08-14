@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { List, Card, message } from "antd";
-import FeatureBookButton from "./FeatureBookButton"; // Adjust the import path
+import FeatureBookButton from "./FeatureBookButton";
 import BookCard from "./BookCard";
 import { fetchBooks } from "../redux/slices/booksSlice";
 
@@ -20,18 +20,19 @@ const BookList = () => {
     }
   }, [error]);
 
-  // Callback function to refresh the book list
   const handleBookUpdate = () => {
     dispatch(fetchBooks());
   };
+
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(search.toLowerCase())
   );
 
-
   return (
-    <div className="p-6  ">
-      <h2 className="text-4xl text-center font-bold mb-8 underline text-white">Book List</h2>
+    <div className="p-6">
+      <h2 className="text-4xl text-center font-bold mb-8 underline text-white">
+        Book List
+      </h2>
       <input
         type="text"
         placeholder="Search books"
@@ -41,7 +42,15 @@ const BookList = () => {
       />
       <List
         loading={loading}
-        grid={{ gutter: 12, column: 3 }}
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 2,
+          md: 3,
+          lg: 4,
+          xl: 4,
+          xxl: 6,
+        }}
         dataSource={filteredBooks}
         renderItem={(book) => (
           <List.Item>
@@ -54,6 +63,7 @@ const BookList = () => {
                   onSuccess={handleBookUpdate}
                 />
               }
+              className="shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <BookCard
                 key={book._id}

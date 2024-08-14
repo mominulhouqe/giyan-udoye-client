@@ -10,7 +10,7 @@ const Hero = () => (
       transition={{ duration: 1 }}
       className=" text-center"
     >
-      <h1 className="text-5xl font-bold">Welcome to GiyanUdaye</h1>
+      <h1 className="text-5xl font-bold">Welcome to GiyanUdaye Library</h1>
       <p className="mt-4 text-xl">
         Explore our extensive collection of Islamic literature
       </p>

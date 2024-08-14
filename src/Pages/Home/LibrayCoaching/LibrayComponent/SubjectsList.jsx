@@ -27,7 +27,7 @@ const SubjectsList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-4xl text-center text-white font-bold mb-4">Coaching Subjects</h2>
+      <h2 className="text-4xl text-center text-white font-bold my-8 underline">Coaching Subjects</h2>
 
       {/* Search Input */}
       <div className="mb-4">

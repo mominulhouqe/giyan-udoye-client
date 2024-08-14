@@ -13,6 +13,7 @@ import BooksDetails from "../Pages/Home/Books/BooksDetails";
 // import ManageClasses from "../Pages/AdminDashboard/CoachingManagement/ManageClasses/ManageClasses";
 import ManageStudents from "../Pages/AdminDashboard/CoachingManagement/ManageStudent/ManageStudent";
 import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSubject/ManageSubjects";
+import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/ManageTutor";
 
 
 const routes = createBrowserRouter([
@@ -68,6 +69,10 @@ const routes = createBrowserRouter([
         path:"subject-management",
         element:<ManageSubjects />
       },
+      {
+        path:"tutor-management",
+        element:<ManageTutor />
+      }
     ]
   },
 

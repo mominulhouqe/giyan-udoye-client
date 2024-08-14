@@ -41,6 +41,7 @@ const items = [
     children: [
       { key: "6c", label: <NavLink to="student-management">Student Management</NavLink> },
       { key: "7c", label: <NavLink to="subject-management">Subject Management</NavLink> },
+      { key: "8c", label: <NavLink to="tutor-management">Tutor Management</NavLink> },
       { key: "8", label: "Blocked Users" },
     ],
   },

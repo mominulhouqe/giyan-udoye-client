@@ -10,15 +10,15 @@ const CoachingTestimionial = () => {
           <div className="flex flex-wrap gap-8 justify-center">
             <div className="bg-white p-6 shadow-lg rounded-lg max-w-sm text-center">
               <p className="text-lg mb-4">"The coaching was fantastic! I learned so much and feel confident in my skills."</p>
-              <p className="font-semibold">Student 1</p>
+              <p className="font-semibold">Jamal Miah</p>
             </div>
             <div className="bg-white p-6 shadow-lg rounded-lg max-w-sm text-center">
               <p className="text-lg mb-4">"Amazing experience! The instructors were knowledgeable and supportive."</p>
-              <p className="font-semibold">Student 2</p>
+              <p className="font-semibold">Piyash Khan</p>
             </div>
             <div className="bg-white p-6 shadow-lg rounded-lg max-w-sm text-center">
               <p className="text-lg mb-4">"Highly recommend! The program was well-organized and engaging."</p>
-              <p className="font-semibold">Student 3</p>
+              <p className="font-semibold">Tufayel Khan</p>
             </div>
           </div>
         </div>
