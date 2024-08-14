@@ -94,7 +94,7 @@ const SideNavbar = () => {
     <>
       <div className="lg:min-h-screen bg-gray-100 shadow-xl">
         {/* Mobile Menu Button */}
-        <div className="lg:hidden p-4">
+        <div className="lg:hidden p-">
           <Button
             type="primary"
             shape="round"
@@ -102,7 +102,7 @@ const SideNavbar = () => {
             onClick={showDrawer}
             className="text-white bg-blue-700"
           >
-            Menu
+          
           </Button>
         </div>
 

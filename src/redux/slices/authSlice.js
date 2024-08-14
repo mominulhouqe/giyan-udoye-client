@@ -9,14 +9,14 @@ export const fetchUserProfile = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        return rejectWithValue("");
+        return rejectWithValue("No token found");
       }
       const response = await axios.get("http://localhost:5000/api/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue("");
+      return rejectWithValue(error.response?.data?.message || "Failed to fetch user profile");
     }
   }
 );
