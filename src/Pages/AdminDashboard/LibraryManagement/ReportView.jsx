@@ -43,19 +43,31 @@ console.log(report);
   return (
     <div>
       <h2>Reports</h2>
+ 
       <Form layout="inline" onFinish={handleFetchMonthlyReport}>
-        <Form.Item name="month" label="Month" rules={[{ required: true }]}>
+        <Form.Item className='w-44' name="month" label="Month" rules={[{ required: true }]}>
           <Select>
             <Select.Option value="January">January</Select.Option>
             <Select.Option value="February">February</Select.Option>
+            <Select.Option value="March">March</Select.Option>
+            <Select.Option value="April">April</Select.Option>
+            <Select.Option value="May">May</Select.Option>
+            <Select.Option value="Jun">Jun</Select.Option>
+            <Select.Option value="July">July</Select.Option>
+            <Select.Option value="August">August</Select.Option>
+            <Select.Option value="September">September</Select.Option>
+            <Select.Option value="October">October</Select.Option>
+            <Select.Option value="Novbember">Novbember</Select.Option>
+            <Select.Option value="December">December</Select.Option>
             {/* Add all months */}
           </Select>
         </Form.Item>
-        <Form.Item name="year" label="Year" rules={[{ required: true }]}>
+        <Form.Item name="year"  label="Year" rules={[{ required: true }]}>
           <Input type="number" />
         </Form.Item>
         <Button type="primary" htmlType="submit">Get Monthly Report</Button>
       </Form>
+      
 
       <Form layout="inline" onFinish={handleFetchYearlyReport} className="mt-4">
         <Form.Item name="year" label="Year" rules={[{ required: true }]}>
