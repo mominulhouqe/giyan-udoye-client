@@ -22,11 +22,13 @@ import FeeTracking from "../Pages/AdminDashboard/LibraryManagement/FeeTracking";
 import ReportGeneration from "../Pages/AdminDashboard/LibraryManagement/ReportGeneration";
 import MonthlyFeeCollection from "../Pages/AdminDashboard/LibraryManagement/MonthlyFeeCollection";
 import ReportView from "../Pages/AdminDashboard/LibraryManagement/ReportView";
+import ErrorPage from "../Pages/shared/ErrorMassage/ErrorPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<ErrorPage />,
     children: [
       {
         path: "/",
