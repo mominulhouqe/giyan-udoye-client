@@ -11,7 +11,7 @@ export const fetchUserProfile = createAsyncThunk(
       if (!token) {
         return rejectWithValue("");
       }
-      const response = await axios.get(" api/v1/users/profile", {
+      const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;

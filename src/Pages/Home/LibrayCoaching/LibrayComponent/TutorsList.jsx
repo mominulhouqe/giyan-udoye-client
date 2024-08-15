@@ -8,7 +8,7 @@ const TutorsList = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const response = await axios.get(" api/v1/tutors");
+        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/tutors");
         setTutors(response.data);
       } catch (error) {
         console.error("Failed to fetch tutors", error);

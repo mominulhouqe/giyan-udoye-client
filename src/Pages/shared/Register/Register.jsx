@@ -16,7 +16,7 @@ const Register = () => {
     try {
       // Include imageUrl in the registration values
       const data = { ...values, profileImage: imageUrl };
-      await axios.post("/api/v1/auth/register", data);
+      await axios.post("https://giyan-udoye.vercel.app/api/v1/auth/register", data);
       notification.success({
         message: "Registration Successful",
         description: "You can now log in with your new account.",

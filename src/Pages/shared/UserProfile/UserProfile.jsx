@@ -16,7 +16,7 @@ const UserProfile = () => {
           message.error("No authentication token found");
           return;
         }
-        const response = await axios.get("api/v1/users/profile", {
+        const response = await axios.get("https://giyan-udoye.vercel.app/api/v1/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);

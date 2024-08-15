@@ -14,7 +14,7 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
           console.log(error.message);
           return;
         }
-        const response = await axios.get(" api/v1/users/profile", {
+        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -32,7 +32,7 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
   const toggleFeatured = async () => {
     try {
       // Toggle the feature status of the book
-      const response = await axios.put(` api/v1/books/${bookId}`, {
+      const response = await axios.put(` https://giyan-udoye.vercel.app/api/v1/books/${bookId}`, {
         featured: !featured,
       });
 

@@ -16,7 +16,7 @@ const useFetchUsers = (token) => {
       }
 
       try {
-        const response = await axios.get(" api/v1/users", {
+        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);

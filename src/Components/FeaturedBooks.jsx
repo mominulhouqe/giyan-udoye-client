@@ -22,7 +22,7 @@ const FeaturedBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(" api/v1/books"); // Fetch all books
+        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/books"); // Fetch all books
 
         // Filter out only the featured books
         const featuredBooks = response.data.filter((book) => book.featured); // Adjust property based on your data

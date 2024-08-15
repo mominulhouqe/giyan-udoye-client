@@ -7,7 +7,7 @@ export const fetchBooks = createAsyncThunk(
   "books/fetchBooks",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(" api/v1/books");
+      const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/books");
       return response.data;
     } catch (error) {
       return rejectWithValue("Failed to fetch books");

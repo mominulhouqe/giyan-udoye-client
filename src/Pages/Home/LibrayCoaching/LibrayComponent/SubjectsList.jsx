@@ -9,7 +9,7 @@ const SubjectsList = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get(" api/v1/subjects");
+        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/subjects");
         setSubjects(response.data);
       } catch (error) {
         console.error("Failed to fetch subjects", error);

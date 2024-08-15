@@ -13,7 +13,7 @@ const BooksDetails = () => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await axios.get(` api/v1/books/${id}`);
+        const response = await axios.get(` https://giyan-udoye.vercel.app/api/v1/books/${id}`);
         setBook(response.data);
       } catch (error) {
         console.error("Failed to fetch book details", error);
