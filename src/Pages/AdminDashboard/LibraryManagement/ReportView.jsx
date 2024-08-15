@@ -38,6 +38,7 @@ const ReportView = () => {
     { title: 'Amount', dataIndex: 'amount', key: 'amount' },
     { title: 'Payment Date', dataIndex: 'paymentDate', key: 'paymentDate' },
   ];
+console.log(report);
 
   return (
     <div>

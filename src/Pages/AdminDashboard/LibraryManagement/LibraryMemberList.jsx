@@ -15,7 +15,7 @@ const LibraryMemberList = () => {
 
   const fetchMembers = async () => {
     try {
-      const response = await axios.get("/api/library-members");
+      const response = await axios.get("http://localhost:5000/api/library-members");
       setMembers(response.data);
     } catch (error) {
       console.error("Error fetching members:", error);
@@ -25,9 +25,9 @@ const LibraryMemberList = () => {
   const handleAddMember = async (values) => {
     try {
       if (editingMember) {
-        await axios.put(`/api/library-members/${editingMember._id}`, values);
+        await axios.put(`http://localhost:5000/api/library-members/${editingMember._id}`, values);
       } else {
-        await axios.post("/api/library-members", values);
+        await axios.post("http://localhost:5000/api/library-members", values);
       }
       setIsModalVisible(false);
       fetchMembers();
@@ -46,7 +46,7 @@ const LibraryMemberList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/library-members/${id}`);
+      await axios.delete(`http://localhost:5000/api/library-members/${id}`);
       fetchMembers();
       notification.success({ message: "Member deleted successfully!" });
     } catch (error) {
@@ -110,9 +110,7 @@ const LibraryMemberList = () => {
         onOk={() => form.submit()}
       >
         <Form form={form} layout="vertical" onFinish={handleAddMember}>
-          <Form.Item name="memberId" label="Member ID" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
+
           <Form.Item name="name" label="Name" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
