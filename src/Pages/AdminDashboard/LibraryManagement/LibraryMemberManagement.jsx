@@ -83,7 +83,7 @@ const LibraryMemberManagement = () => {
       <Button type="primary" onClick={handleAddClick} style={{ marginBottom: 16 }}>
         Add Library Member
       </Button>
-      <Table dataSource={members} columns={columns} rowKey="_id" />
+      <Table       scroll={{ x: "100%", y: 500 }} dataSource={members} columns={columns} rowKey="_id" />
 
       <Modal
         title={currentMember ? 'Edit Library Member' : 'Add Library Member'}

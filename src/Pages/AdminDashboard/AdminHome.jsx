@@ -82,7 +82,7 @@ const AdminHome = () => {
         Add Member
       </Button> */}
 
-      <Table dataSource={books} rowKey="_id" className="mt-4 overflow-x-auto">
+      <Table       scroll={{ x: "100%", y: 500 }} dataSource={books} rowKey="_id" className="mt-4 overflow-x-auto">
         <Table.Column title="Title" dataIndex="title" key="title" />
         <Table.Column title="Author" dataIndex="author" key="author" />
         <Table.Column

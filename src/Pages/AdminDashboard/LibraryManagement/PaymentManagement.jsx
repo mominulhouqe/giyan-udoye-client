@@ -87,7 +87,7 @@ const PaymentManagement = () => {
       >
         Add Payment
       </Button>
-      <Table dataSource={payments} columns={columns} rowKey="_id" />
+      <Table       scroll={{ x: "100%", y: 500 }} dataSource={payments} columns={columns} rowKey="_id" />
 
       <Modal
         title={editingPayment ? 'Edit Payment' : 'Add Payment'}

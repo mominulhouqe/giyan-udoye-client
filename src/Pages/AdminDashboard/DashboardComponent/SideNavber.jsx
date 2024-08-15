@@ -30,8 +30,10 @@ const items = [
     label: "Library Management",
     icon: <BookOutlined />,
     children: [
-      { key: "1", label: <NavLink to="all-books">All Books</NavLink> },
-      { key: "2", label: <NavLink to="library-member">Library Members</NavLink> },
+      { key: "1", label: <NavLink to="/admin">All Books</NavLink> },
+      { key: "2", label: <NavLink to="library-member">Add Library Members</NavLink> },
+      { key: "3", label: <NavLink to="payment-member">Payment Library Members</NavLink> },
+      { key: "4", label: <NavLink to="payment-report">Payment History</NavLink> },
     ],
   },
   {
@@ -42,7 +44,7 @@ const items = [
       { key: "6c", label: <NavLink to="student-management">Student Management</NavLink> },
       { key: "7c", label: <NavLink to="subject-management">Subject Management</NavLink> },
       { key: "8c", label: <NavLink to="tutor-management">Tutor Management</NavLink> },
-      { key: "8", label: "Blocked Users" },
+      { key: "9c", label: "Blocked Users" },
     ],
   },
   {

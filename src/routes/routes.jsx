@@ -72,14 +72,25 @@ const routes = createBrowserRouter([
         path: "allusers",
         element: <AllUsers />,
       },
+      // For Library management
       {
-        path: "library-member",
-        element: <LibraryMemberManagement />,
+        path: "Library-member",
+        element: <LibraryMemberList />,
+      },
+      {
+        path: "payment-member",
+        element: <PaymentManagement />,
+      },
+      {
+        path: "payment-report",
+        element: <ReportView />,
       },
       // {
       //   path:"class-management",
       //   element:<ManageClasses />
       // },
+
+      // For coaching center
       {
         path: "student-management",
         element: <ManageStudents />,
@@ -94,30 +105,30 @@ const routes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "members",
-    element: <LibraryMemberList />,
-  },
-  {
-    path: "payments",
-    element: <PaymentManagement />,
-  },
-  {
-    path: "fees",
-    element: <FeeTracking />,
-  },
-  {
-    path: "reports",
-    element: <ReportGeneration />,
-  },
-  {
-path:"fee-collect",
-element:<MonthlyFeeCollection />
-  },
-  {
-path:"report-view",
-element:<ReportView />
-  },
+  // {
+  //   path: "members",
+  //   element: <LibraryMemberList />,
+  // },
+  // {
+  //   path: "payments",
+  //   element: <PaymentManagement />,
+  // },
+  //   {
+  //     path: "fees",
+  //     element: <FeeTracking />,
+  //   },
+  //   {
+  //     path: "reports",
+  //     element: <ReportGeneration />,
+  //   },
+  //   {
+  // path:"fee-collect",
+  // element:<MonthlyFeeCollection />
+  //   },
+  //   {
+  // path:"report-view",
+  // element:<ReportView />
+  //   },
 
   {
     path: "/login",
