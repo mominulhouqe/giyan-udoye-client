@@ -16,6 +16,12 @@ import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSub
 import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/ManageTutor";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import LibraryMemberManagement from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberManagement";
+import LibraryMemberList from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberList";
+import PaymentManagement from "../Pages/AdminDashboard/LibraryManagement/PaymentManagement";
+import FeeTracking from "../Pages/AdminDashboard/LibraryManagement/FeeTracking";
+import ReportGeneration from "../Pages/AdminDashboard/LibraryManagement/ReportGeneration";
+import MonthlyFeeCollection from "../Pages/AdminDashboard/LibraryManagement/MonthlyFeeCollection";
+import ReportView from "../Pages/AdminDashboard/LibraryManagement/ReportView";
 
 const routes = createBrowserRouter([
   {
@@ -32,14 +38,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "bookList",
-        element:<AuthenticatedRoute>
-           <BookList />
-        </AuthenticatedRoute>,
+        element: (
+          <AuthenticatedRoute>
+            <BookList />
+          </AuthenticatedRoute>
+        ),
       },
       {
         path: "book-details/:id",
-        element: <BooksDetails />
-    
+        element: <BooksDetails />,
       },
       {
         path: "coaching",
@@ -50,9 +57,11 @@ const routes = createBrowserRouter([
 
   {
     path: "admin",
-    element: <AuthenticatedRoute>
-      <Admin />
-    </AuthenticatedRoute>,
+    element: (
+      <AuthenticatedRoute>
+        <Admin />
+      </AuthenticatedRoute>
+    ),
     children: [
       {
         index: true,
@@ -64,8 +73,8 @@ const routes = createBrowserRouter([
         element: <AllUsers />,
       },
       {
-        path:"library-member",
-        element:<LibraryMemberManagement />
+        path: "library-member",
+        element: <LibraryMemberManagement />,
       },
       // {
       //   path:"class-management",
@@ -84,6 +93,30 @@ const routes = createBrowserRouter([
         element: <ManageTutor />,
       },
     ],
+  },
+  {
+    path: "members",
+    element: <LibraryMemberList />,
+  },
+  {
+    path: "payments",
+    element: <PaymentManagement />,
+  },
+  {
+    path: "fees",
+    element: <FeeTracking />,
+  },
+  {
+    path: "reports",
+    element: <ReportGeneration />,
+  },
+  {
+path:"fee-collect",
+element:<MonthlyFeeCollection />
+  },
+  {
+path:"report-view",
+element:<ReportView />
   },
 
   {
