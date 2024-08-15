@@ -11,9 +11,7 @@ const RecentAdditions = () => {
   // Function to fetch recent additions
   const fetchRecentAdditions = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/books?recent=true"
-      );
+      const response = await axios.get(" api/v1/books?recent=true");
       setBooks(response.data); // Update state with fetched data
       setLoading(false); // Set loading to false after data is fetched
     } catch (error) {

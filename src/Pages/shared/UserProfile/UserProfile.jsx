@@ -16,7 +16,7 @@ const UserProfile = () => {
           message.error("No authentication token found");
           return;
         }
-        const response = await axios.get("api/users/profile", {
+        const response = await axios.get("api/v1/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -34,11 +34,17 @@ const UserProfile = () => {
 
   return (
     <div className="p-2 flex justify-center items-center h-screen ">
-      <Card title="User Profile" className="w-full max-w-md mx-auto text-center space-y-4 bg-gray-50 bg-opacity-70 ">
+      <Card
+        title="User Profile"
+        className="w-full max-w-md mx-auto text-center space-y-4 bg-gray-50 bg-opacity-70 "
+      >
         <Link to="/profile">
-          <Avatar src={user?.profileImage}   className="w-44 h-44 object-cover my-2 border rounded-full border-white p-1"/>
+          <Avatar
+            src={user?.profileImage}
+            className="w-44 h-44 object-cover my-2 border rounded-full border-white p-1"
+          />
         </Link>
-        <p >
+        <p>
           <strong>Name:</strong> {user?.name}
         </p>
         <p>

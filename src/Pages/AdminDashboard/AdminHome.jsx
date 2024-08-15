@@ -11,7 +11,9 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/books"); // Ensure this URL is correct
+        const res = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/books"
+        ); // Ensure this URL is correct
         console.log("Fetched books:", res.data); // Log the response
         if (Array.isArray(res.data)) {
           setBooks(res.data);
@@ -40,17 +42,22 @@ const AdminHome = () => {
     try {
       if (updatedBook._id) {
         await axios.put(
-          `http://localhost:5000/api/books/${updatedBook._id}`,
+          `https://giyan-udoye.vercel.app/api/v1/books/${updatedBook._id}`,
           updatedBook
         ); // Ensure this URL is correct
         message.success("Book updated successfully");
       } else {
-        await axios.post("http://localhost:5000/api/books", updatedBook); // Ensure this URL is correct
+        await axios.post(
+          "https://giyan-udoye.vercel.app/api/v1/books",
+          updatedBook
+        ); // Ensure this URL is correct
         message.success("Book added successfully");
       }
       setIsModalVisible(false);
       setCurrentBook(null);
-      const res = await axios.get("http://localhost:5000/api/books"); // Ensure this URL is correct
+      const res = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/books"
+      ); // Ensure this URL is correct
       setBooks(res.data);
     } catch (err) {
       message.error("Failed to save book");
@@ -64,7 +71,7 @@ const AdminHome = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/books/${id}`);
+      await axios.delete(`https://giyan-udoye.vercel.app/api/v1/books/${id}`);
       message.success("Book deleted successfully");
       setBooks(books.filter((book) => book._id !== id));
     } catch (err) {
@@ -73,8 +80,11 @@ const AdminHome = () => {
   };
 
   return (
-    <div >
-        <h2 className="py-4 mb-2 text-2xl font-bold underline text-center bg-gray-200"> Books Page</h2>
+    <div>
+      <h2 className="py-4 mb-2 text-2xl font-bold underline text-center bg-gray-200">
+        {" "}
+        Books Page
+      </h2>
       <Button type="primary" onClick={() => showModal()}>
         Add Book
       </Button>
@@ -82,7 +92,12 @@ const AdminHome = () => {
         Add Member
       </Button> */}
 
-      <Table       scroll={{ x: "100%", y: 500 }} dataSource={books} rowKey="_id" className="mt-4 overflow-x-auto">
+      <Table
+        scroll={{ x: "100%", y: 500 }}
+        dataSource={books}
+        rowKey="_id"
+        className="mt-4 overflow-x-auto"
+      >
         <Table.Column title="Title" dataIndex="title" key="title" />
         <Table.Column title="Author" dataIndex="author" key="author" />
         <Table.Column

@@ -10,14 +10,16 @@ const ManageTutor = () => {
     subject: "",
     profession: "",
     contact: "",
-    image: ""
+    image: "",
   });
   const [alert, setAlert] = useState({ type: "", message: "", visible: false });
 
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/tutors");
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/tutors"
+        );
         setTutors(response.data);
       } catch (error) {
         console.error("Failed to fetch tutors", error);
@@ -31,41 +33,46 @@ const ManageTutor = () => {
     const { name, value } = e.target;
     setNewTutor({ ...newTutor, [name]: value });
   };
-console.log(tutors);
+  console.log(tutors);
 
   const handleAddTutor = async () => {
     const { name, subject, profession, contact, image } = newTutor;
-    
+
     if (!name || !subject || !profession || !contact || !image) {
       setAlert({
         type: "error",
         message: "All fields are required.",
-        visible: true
+        visible: true,
       });
       return;
     }
 
     try {
-      await axios.post("http://localhost:5000/api/tutors", newTutor);
+      await axios.post(
+        "https://giyan-udoye.vercel.app/api/v1/tutors",
+        newTutor
+      );
       setNewTutor({
         name: "",
         subject: "",
         profession: "",
         contact: "",
-        image: ""
+        image: "",
       });
-      const response = await axios.get("http://localhost:5000/api/tutors");
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/tutors"
+      );
       setTutors(response.data);
       setAlert({
         type: "success",
         message: "Tutor added successfully!",
-        visible: true
+        visible: true,
       });
     } catch (error) {
       setAlert({
         type: "error",
         message: "Failed to add tutor.",
-        visible: true
+        visible: true,
       });
       console.error("Failed to add tutor", error);
     }
@@ -73,19 +80,21 @@ console.log(tutors);
 
   const handleDeleteTutor = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tutors/${id}`);
-      const response = await axios.get("http://localhost:5000/api/tutors");
+      await axios.delete(`https://giyan-udoye.vercel.app/api/v1/tutors/${id}`);
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/tutors"
+      );
       setTutors(response.data);
       setAlert({
         type: "success",
         message: "Tutor deleted successfully!",
-        visible: true
+        visible: true,
       });
     } catch (error) {
       setAlert({
         type: "error",
         message: "Failed to delete tutor.",
-        visible: true
+        visible: true,
       });
       console.error("Failed to delete tutor", error);
     }
@@ -171,7 +180,7 @@ console.log(tutors);
                 onClick={() => handleDeleteTutor(tutor._id)}
               >
                 Delete
-              </Button>
+              </Button>,
             ]}
           >
             <List.Item.Meta

@@ -1,5 +1,5 @@
 // src/components/LibraryStatistics.js
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { message } from "antd";
@@ -22,7 +22,7 @@ const LibraryStatistics = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("/api/books");
+        const response = await axios.get(" api/v1/books");
         setBooks(response.data);
       } catch (error) {
         console.error("Failed to fetch books", error);
@@ -36,7 +36,6 @@ const LibraryStatistics = () => {
   }, []);
   return (
     <div className="py-12 bg-gray-50 bg-opacity-50 m-3 rounded-md">
-  
       <h2 className="text-3xl text-center font-bold mb-8 underline">
         Library Statistics
       </h2>

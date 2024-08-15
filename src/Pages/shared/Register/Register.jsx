@@ -16,7 +16,7 @@ const Register = () => {
     try {
       // Include imageUrl in the registration values
       const data = { ...values, profileImage: imageUrl };
-      await axios.post("/api/auth/register", data);
+      await axios.post("/api/v1/auth/register", data);
       notification.success({
         message: "Registration Successful",
         description: "You can now log in with your new account.",
@@ -107,7 +107,9 @@ const Register = () => {
             Register
           </Button>
         </Form.Item>
-        <Link to="/login" className="underline hover:text-blue-500">Already have account?</Link>
+        <Link to="/login" className="underline hover:text-blue-500">
+          Already have account?
+        </Link>
       </Form>
     </div>
   );

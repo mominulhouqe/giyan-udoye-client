@@ -18,7 +18,9 @@ const ManageStudents = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/students");
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/students"
+        );
         setStudents(response.data);
       } catch (error) {
         console.error("Failed to fetch students", error);
@@ -35,7 +37,10 @@ const ManageStudents = () => {
 
   const handleAddStudent = async () => {
     try {
-      await axios.post("http://localhost:5000/api/students", newStudent);
+      await axios.post(
+        "https://giyan-udoye.vercel.app/api/v1/students",
+        newStudent
+      );
       setNewStudent({
         name: "",
         email: "",
@@ -44,7 +49,9 @@ const ManageStudents = () => {
         batchName: "",
         subjectName: "",
       });
-      const response = await axios.get("http://localhost:5000/api/students");
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/students"
+      );
       setStudents(response.data);
       setAlert({
         type: "success",
@@ -63,8 +70,12 @@ const ManageStudents = () => {
 
   const handleDeleteStudent = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/students/${id}`);
-      const response = await axios.get("http://localhost:5000/api/students");
+      await axios.delete(
+        `https://giyan-udoye.vercel.app/api/v1/students/${id}`
+      );
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/students"
+      );
       setStudents(response.data);
       setAlert({
         type: "success",

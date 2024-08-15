@@ -11,7 +11,7 @@ const Login = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/auth/login", values);
+      const response = await axios.post(" api/v1/auth/login", values);
       const { token } = response.data;
       localStorage.setItem("token", token);
       notification.success({
@@ -61,7 +61,9 @@ const Login = () => {
             Login
           </Button>
         </Form.Item>
-      <Link to="/register" className="underline hover:text-blue-500">Are you new here?Please Register First !!!</Link>
+        <Link to="/register" className="underline hover:text-blue-500">
+          Are you new here?Please Register First !!!
+        </Link>
       </Form>
     </div>
   );

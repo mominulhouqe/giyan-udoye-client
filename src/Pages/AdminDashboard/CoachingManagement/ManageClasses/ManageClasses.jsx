@@ -10,14 +10,16 @@ const ManageClasses = () => {
     duration: "",
     contactEmail: "",
     contactPhone: "",
-    rating:"",
+    rating: "",
     availableSeats: 0,
   });
 
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/classes");
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/classes"
+        );
         setClasses(response.data);
       } catch (error) {
         console.error("Failed to fetch classes", error);
@@ -34,7 +36,10 @@ const ManageClasses = () => {
 
   const handleAddClass = async () => {
     try {
-      await axios.post("http://localhost:5000/api/classes", newClass);
+      await axios.post(
+        "https://giyan-udoye.vercel.app/api/v1/classes",
+        newClass
+      );
       setNewClass({
         name: "",
         subject: "",
@@ -43,10 +48,12 @@ const ManageClasses = () => {
         contactEmail: "",
         contactPhone: "",
         rating: "",
-        availableSeats: 0
+        availableSeats: 0,
       });
       // Refresh the list
-      const response = await axios.get("http://localhost:5000/api/classes");
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/classes"
+      );
       setClasses(response.data);
     } catch (error) {
       console.error("Failed to add class", error);
@@ -105,7 +112,7 @@ const ManageClasses = () => {
           className="border p-2 mb-2"
           placeholder="Contact Phone"
         />
-      
+
         <input
           type="number"
           name="availableSeats"
@@ -114,7 +121,7 @@ const ManageClasses = () => {
           className="border p-2 mb-2"
           placeholder="Available Seats"
         />
-          <input
+        <input
           type="text"
           name="Rating"
           value={newClass.rating}
@@ -122,20 +129,30 @@ const ManageClasses = () => {
           className="border p-2 mb-2"
           placeholder="Rating"
         />
-        <button onClick={handleAddClass} className="bg-blue-500 text-white p-2 rounded">
+        <button
+          onClick={handleAddClass}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
           Add Class
         </button>
       </div>
       <ul className="mt-4 ">
         {classes.map((cls) => (
           <li key={cls._id} className="mb-2 bg-gray-200 p-2 rounded-md">
-            <strong>{cls.name}</strong><br />
-            Subject: {cls.subject}<br />
-            Instructor: {cls.instructor}<br />
-            Duration: {cls.duration}<br />
-            Rating: {cls.rating}<br />
-            Email: {cls.contactEmail}<br />
-            Phone: {cls.contactPhone}<br />
+            <strong>{cls.name}</strong>
+            <br />
+            Subject: {cls.subject}
+            <br />
+            Instructor: {cls.instructor}
+            <br />
+            Duration: {cls.duration}
+            <br />
+            Rating: {cls.rating}
+            <br />
+            Email: {cls.contactEmail}
+            <br />
+            Phone: {cls.contactPhone}
+            <br />
             Available Seats: {cls.availableSeats}
           </li>
         ))}

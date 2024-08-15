@@ -2,7 +2,6 @@ import { Button, message, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,17 +11,15 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-        console.log(error.message);
-        ;
+          console.log(error.message);
           return;
         }
-        const response = await axios.get("api/users/profile", {
+        const response = await axios.get(" api/v1/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
       } catch (error) {
-      console.log(error.message);
-      ;
+        console.log(error.message);
       } finally {
         setLoading(false);
       }
@@ -35,7 +32,7 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
   const toggleFeatured = async () => {
     try {
       // Toggle the feature status of the book
-      const response = await axios.put(`/api/books/${bookId}`, {
+      const response = await axios.put(` api/v1/books/${bookId}`, {
         featured: !featured,
       });
 

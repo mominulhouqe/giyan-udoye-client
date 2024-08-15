@@ -9,7 +9,7 @@ const SubjectsList = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("/api/subjects");
+        const response = await axios.get(" api/v1/subjects");
         setSubjects(response.data);
       } catch (error) {
         console.error("Failed to fetch subjects", error);
@@ -20,14 +20,17 @@ const SubjectsList = () => {
   }, []);
 
   // Filter subjects based on the search query
-  const filteredSubjects = subjects.filter((subject) =>
-    subject.subjectName.toLowerCase().includes(searchQuery.toLowerCase())||
-  subject.className.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredSubjects = subjects.filter(
+    (subject) =>
+      subject.subjectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      subject.className.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-4xl text-center text-white font-bold my-8 underline">Coaching Subjects</h2>
+      <h2 className="text-4xl text-center text-white font-bold my-8 underline">
+        Coaching Subjects
+      </h2>
 
       {/* Search Input */}
       <div className="mb-4">

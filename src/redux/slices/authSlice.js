@@ -11,12 +11,14 @@ export const fetchUserProfile = createAsyncThunk(
       if (!token) {
         return rejectWithValue("");
       }
-      const response = await axios.get("http://localhost:5000/api/users/profile", {
+      const response = await axios.get(" api/v1/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch user profile");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch user profile"
+      );
     }
   }
 );

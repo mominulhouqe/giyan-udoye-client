@@ -16,7 +16,7 @@ const LibraryMemberList = () => {
   const fetchMembers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/library-members"
+        "https://giyan-udoye.vercel.app/api/v1/library-members"
       );
       setMembers(response.data);
     } catch (error) {
@@ -28,11 +28,14 @@ const LibraryMemberList = () => {
     try {
       if (editingMember) {
         await axios.put(
-          `http://localhost:5000/api/library-members/${editingMember._id}`,
+          `https://giyan-udoye.vercel.app/api/v1/library-members/${editingMember._id}`,
           values
         );
       } else {
-        await axios.post("http://localhost:5000/api/library-members", values);
+        await axios.post(
+          "https://giyan-udoye.vercel.app/api/v1/library-members",
+          values
+        );
       }
       setIsModalVisible(false);
       fetchMembers();
@@ -51,7 +54,9 @@ const LibraryMemberList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/library-members/${id}`);
+      await axios.delete(
+        `https://giyan-udoye.vercel.app/api/v1/library-members/${id}`
+      );
       fetchMembers();
       notification.success({ message: "Member deleted successfully!" });
     } catch (error) {

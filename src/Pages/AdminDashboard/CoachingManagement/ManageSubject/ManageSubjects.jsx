@@ -23,7 +23,9 @@ const ManageSubjects = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/subjects");
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/subjects"
+        );
         setSubjects(response.data);
       } catch (error) {
         setAlert({
@@ -59,7 +61,10 @@ const ManageSubjects = () => {
 
   const handleAddSubject = async () => {
     try {
-      await axios.post("http://localhost:5000/api/subjects", newSubject);
+      await axios.post(
+        "https://giyan-udoye.vercel.app/api/v1/subjects",
+        newSubject
+      );
       setNewSubject({
         className: "",
         subjectName: "",
@@ -73,7 +78,9 @@ const ManageSubjects = () => {
         },
         availableSeats: "",
       });
-      const response = await axios.get("http://localhost:5000/api/subjects");
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/subjects"
+      );
       setSubjects(response.data);
       setAlert({
         type: "success",
@@ -92,8 +99,12 @@ const ManageSubjects = () => {
 
   const handleDeleteSubject = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/subjects/${id}`);
-      const response = await axios.get("http://localhost:5000/api/subjects");
+      await axios.delete(
+        `https://giyan-udoye.vercel.app/api/v1/subjects/${id}`
+      );
+      const response = await axios.get(
+        "https://giyan-udoye.vercel.app/api/v1/subjects"
+      );
       setSubjects(response.data);
       setAlert({
         type: "success",
@@ -236,8 +247,8 @@ const ManageSubjects = () => {
                   <span>Instructor: {subject.instructor}</span>
                   <span>Duration: {subject.duration}</span>
                   <span>Rating: {subject.rating}</span>
-                  <span>Contact Email: {subject.contact.email}</span>
-                  <span>Contact Phone: {subject.contact.phone}</span>
+                  <span>Contact Email: {subject?.contact?.email}</span>
+                  <span>Contact Phone: {subject?.contact?.phone}</span>
                   <span>Available Seats: {subject.availableSeats}</span>
                 </Space>
               }
