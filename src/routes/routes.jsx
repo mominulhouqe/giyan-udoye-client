@@ -10,17 +10,13 @@ import AllUsers from "../Pages/AdminDashboard/AllUsers/AllUsers";
 import Coaching from "../Pages/Home/LibrayCoaching/Coaching";
 import AdminHome from "../Pages/AdminDashboard/AdminHome";
 import BooksDetails from "../Pages/Home/Books/BooksDetails";
-// import ManageClasses from "../Pages/AdminDashboard/CoachingManagement/ManageClasses/ManageClasses";
 import ManageStudents from "../Pages/AdminDashboard/CoachingManagement/ManageStudent/ManageStudent";
 import ManageSubjects from "../Pages/AdminDashboard/CoachingManagement/ManageSubject/ManageSubjects";
 import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/ManageTutor";
 import AuthenticatedRoute from "./AuthenticatedRoute";
-import LibraryMemberManagement from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberManagement";
 import LibraryMemberList from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberList";
 import PaymentManagement from "../Pages/AdminDashboard/LibraryManagement/PaymentManagement";
-import FeeTracking from "../Pages/AdminDashboard/LibraryManagement/FeeTracking";
-import ReportGeneration from "../Pages/AdminDashboard/LibraryManagement/ReportGeneration";
-import MonthlyFeeCollection from "../Pages/AdminDashboard/LibraryManagement/MonthlyFeeCollection";
+
 import ReportView from "../Pages/AdminDashboard/LibraryManagement/ReportView";
 import ErrorPage from "../Pages/shared/ErrorMassage/ErrorPage";
 
@@ -107,31 +103,6 @@ const routes = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "members",
-  //   element: <LibraryMemberList />,
-  // },
-  // {
-  //   path: "payments",
-  //   element: <PaymentManagement />,
-  // },
-  //   {
-  //     path: "fees",
-  //     element: <FeeTracking />,
-  //   },
-  //   {
-  //     path: "reports",
-  //     element: <ReportGeneration />,
-  //   },
-  //   {
-  // path:"fee-collect",
-  // element:<MonthlyFeeCollection />
-  //   },
-  //   {
-  // path:"report-view",
-  // element:<ReportView />
-  //   },
-
   {
     path: "/login",
     element: <Login />,

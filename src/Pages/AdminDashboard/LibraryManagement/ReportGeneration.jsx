@@ -21,9 +21,7 @@ const ReportGeneration = () => {
           endDate: dayjs(endDate).format('YYYY-MM-DD'),
         },
       });
-
-      // Handle report generation logic here
-      console.log('Report data:', response.data);
+      
       notification.success({ message: 'Report generated successfully!' });
     } catch (error) {
       console.error('Error generating report:', error);

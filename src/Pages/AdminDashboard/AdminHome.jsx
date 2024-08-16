@@ -14,7 +14,6 @@ const AdminHome = () => {
         const res = await axios.get(
           "https://giyan-udoye.vercel.app/api/v1/books"
         ); // Ensure this URL is correct
-        console.log("Fetched books:", res.data); // Log the response
         if (Array.isArray(res.data)) {
           setBooks(res.data);
         } else {
@@ -136,35 +135,6 @@ const AdminHome = () => {
         />
       </Table>
       <hr className="my-6" />
-      {/* For add member
-      <Table dataSource={addmember} rowKey="_id" className="mt-4">
-        <Table.Column title="Name" dataIndex="name" key="name" />
-        <Table.Column title="Email" dataIndex="email" key="email" />
-        <Table.Column title="Phone" dataIndex="phone" key="phone" />
-    
-        <Table.Column
-          title="Actions"
-          key="actions"
-          render={(text, record) => (
-            <div>
-              <Button
-                onClick={() => showModalAddMember(record)}
-                style={{ marginRight: "8px" }}
-              >
-                Edit
-              </Button>
-              <Popconfirm
-                title="Are you sure you want to delete this book?"
-                onConfirm={() => handleDelete(record._id)}
-                okText="Yes"
-                cancelText="No"
-              >
-                <Button type="danger">Delete</Button>
-              </Popconfirm>
-            </div>
-          )}
-        />
-      </Table> */}
 
       <BookForm
         book={currentBook}

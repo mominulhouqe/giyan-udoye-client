@@ -35,7 +35,7 @@ const DonationPage = () => {
 
             <div>
               <h2 class="text-xl font-light">Bkash</h2>
-              <p class="font-light">01937985805</p>
+              <p class="font-light">01708409782</p>
             </div>
           </div>
           <div class="flex gap-3 items-center">
@@ -49,8 +49,8 @@ const DonationPage = () => {
               </svg>
             </span>
             <div>
-              <h2 class="text-xl font-light">Whatsapp</h2>
-              <p class="font-light">01937985805</p>
+              <h2 class="text-xl font-light">Call</h2>
+              <p class="font-light">01876697546</p>
             </div>
           </div>
         </div>

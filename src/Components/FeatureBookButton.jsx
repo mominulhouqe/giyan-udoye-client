@@ -14,9 +14,12 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
           console.log(error.message);
           return;
         }
-        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          " https://giyan-udoye.vercel.app/api/v1/users/profile",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setUser(response.data);
       } catch (error) {
         console.log(error.message);
@@ -32,9 +35,12 @@ const FeatureBookButton = ({ bookId, featured, onSuccess }) => {
   const toggleFeatured = async () => {
     try {
       // Toggle the feature status of the book
-      const response = await axios.put(` https://giyan-udoye.vercel.app/api/v1/books/${bookId}`, {
-        featured: !featured,
-      });
+      const response = await axios.put(
+        ` https://giyan-udoye.vercel.app/api/v1/books/${bookId}`,
+        {
+          featured: !featured,
+        }
+      );
 
       // Call the onSuccess callback to update the UI or refetch the book list
       if (onSuccess) {

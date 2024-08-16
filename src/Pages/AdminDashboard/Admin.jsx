@@ -1,5 +1,4 @@
 import SideNavbar from "./DashboardComponent/SideNavber";
-import AdminHome from "./AdminHome";
 import { Outlet } from "react-router-dom";
 
 const Admin = () => {

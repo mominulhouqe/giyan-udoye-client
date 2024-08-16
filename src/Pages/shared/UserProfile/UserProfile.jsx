@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Spin, Button, message, Avatar } from "antd";
 import axios from "axios";
-import Profile from "../Profile/Profile";
 import { Link } from "react-router-dom";
 
 const UserProfile = () => {

@@ -33,7 +33,7 @@ const ManageTutor = () => {
     const { name, value } = e.target;
     setNewTutor({ ...newTutor, [name]: value });
   };
-  console.log(tutors);
+
 
   const handleAddTutor = async () => {
     const { name, subject, profession, contact, image } = newTutor;

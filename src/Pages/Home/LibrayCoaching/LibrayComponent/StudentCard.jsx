@@ -1,7 +1,6 @@
 import React from "react";
 
 const StudentCard = ({ student }) => {
-  console.log(student);
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
       <img src={student.image} alt={student.name} className="w-24 h-24 rounded-full mb-2" />
