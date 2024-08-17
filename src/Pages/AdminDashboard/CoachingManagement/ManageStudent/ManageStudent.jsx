@@ -93,7 +93,7 @@ const ManageStudents = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-2">
       <h1 className="text-3xl font-bold mb-4">Manage Students</h1>
 
       {alert.visible && (
@@ -185,7 +185,7 @@ const ManageStudents = () => {
             ]}
           >
             <List.Item.Meta
-              className="p-2"
+             
               avatar={<Avatar src={student.image} />}
               title={student.name}
               description={`Email: ${student.email} | Phone: ${student.phone} | Batch: ${student.batchName} | Subject: ${student.subjectName}`}

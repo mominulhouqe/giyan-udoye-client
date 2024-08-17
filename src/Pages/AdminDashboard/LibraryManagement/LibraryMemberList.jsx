@@ -112,7 +112,7 @@ const LibraryMemberList = () => {
         Add Member
       </Button>
       <Table
-        scroll={{ x: "100%", y: 500 }}
+      
         dataSource={members}
         columns={columns}
         rowKey="_id"

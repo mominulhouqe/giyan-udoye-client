@@ -109,7 +109,7 @@ const PaymentManagement = () => {
         Add Payment
       </Button>
       <Table
-        scroll={{ x: "100%", y: 500 }}
+    
         dataSource={payments}
         columns={columns}
         rowKey="_id"
