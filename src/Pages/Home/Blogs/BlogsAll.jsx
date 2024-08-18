@@ -14,7 +14,7 @@ const BlogsAll = () => {
 
   const fetchBlogs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/blogs");
+      const { data } = await axios.get("https://giyan-udoye.vercel.app/api/v1/blogs");
       setBlogs(data);
     } catch (error) {
       message.error("Failed to fetch blogs");

@@ -17,7 +17,7 @@ const QuotesPage = () => {
 
   const fetchQuotes = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/v1/quotes');
+      const { data } = await axios.get('https://giyan-udoye.vercel.app/api/v1/quotes');
       setQuotes(data);
     } catch (error) {
       message.error('Failed to fetch quotes');
@@ -38,7 +38,7 @@ const QuotesPage = () => {
 
   const handleDeleteQuote = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/quotes/${id}`);
+      await axios.delete(`https://giyan-udoye.vercel.app/api/v1/quotes/${id}`);
       message.success('Quote deleted successfully');
       fetchQuotes();
     } catch (error) {
@@ -49,10 +49,10 @@ const QuotesPage = () => {
   const handleSubmit = async (values) => {
     try {
       if (editingQuote) {
-        await axios.put(`http://localhost:5000/api/v1/quotes/${editingQuote._id}`, values);
+        await axios.put(`https://giyan-udoye.vercel.app/api/v1/quotes/${editingQuote._id}`, values);
         message.success('Quote updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/v1/quotes', values);
+        await axios.post('https://giyan-udoye.vercel.app/api/v1/quotes', values);
         message.success('Quote added successfully');
       }
       fetchQuotes();

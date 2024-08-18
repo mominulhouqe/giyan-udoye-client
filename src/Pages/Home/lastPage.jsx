@@ -19,7 +19,7 @@ const LastPage = () => {
 
   const fetchStatistics = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/stats");
+      const { data } = await axios.get("https://giyan-udoye.vercel.app/api/v1/stats");
       setStats(data);
     } catch (error) {
       message.error("Failed to fetch statistics");
@@ -28,7 +28,7 @@ const LastPage = () => {
 
   const fetchQuoteOfTheDay = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/quotes");
+      const { data } = await axios.get("https://giyan-udoye.vercel.app/api/v1/quotes");
       console.log(data);
 
       // Assuming each quote has a `createdAt` field to sort by
@@ -50,7 +50,7 @@ const LastPage = () => {
   const fetchBlogs = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/v1/blogs?limit=3"
+        "https://giyan-udoye.vercel.app/api/v1/blogs?limit=3"
       );
       setBlogs(data);
     } catch (error) {

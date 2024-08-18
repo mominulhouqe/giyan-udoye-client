@@ -17,7 +17,7 @@ const BlogsPage = () => {
 
   const fetchBlogs = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/v1/blogs');
+      const { data } = await axios.get('https://giyan-udoye.vercel.app/api/v1/blogs');
       setBlogs(data);
     } catch (error) {
       message.error('Failed to fetch blogs');
@@ -38,7 +38,7 @@ const BlogsPage = () => {
 
   const handleDeleteBlog = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/blogs/${id}`);
+      await axios.delete(`https://giyan-udoye.vercel.app/api/v1/blogs/${id}`);
       message.success('Blog deleted successfully');
       fetchBlogs();
     } catch (error) {
@@ -49,10 +49,10 @@ const BlogsPage = () => {
   const handleSubmit = async (values) => {
     try {
       if (editingBlog) {
-        await axios.put(`http://localhost:5000/api/v1/blogs/${editingBlog._id}`, values);
+        await axios.put(`https://giyan-udoye.vercel.app/api/v1/blogs/${editingBlog._id}`, values);
         message.success('Blog updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/v1/blogs', values);
+        await axios.post('https://giyan-udoye.vercel.app/api/v1/blogs', values);
         message.success('Blog added successfully');
       }
       fetchBlogs();
