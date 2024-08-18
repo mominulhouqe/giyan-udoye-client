@@ -24,6 +24,16 @@ const items = [
     key: "Home1",
     icon: <HomeFilled />,
     label: <NavLink to="/admin">Home</NavLink>,
+    children:[
+      {
+        key:"h1",
+        label:<NavLink to="blogs">Blog Management</NavLink>
+      },
+      {
+        key:"h3",
+        label:<NavLink to="quotes">Quotes Management</NavLink>
+      },
+    ]
   },
   {
     key: "sub1",

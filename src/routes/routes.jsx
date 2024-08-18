@@ -16,15 +16,17 @@ import ManageTutor from "../Pages/AdminDashboard/CoachingManagement/ManageTutor/
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import LibraryMemberList from "../Pages/AdminDashboard/LibraryManagement/LibraryMemberList";
 import PaymentManagement from "../Pages/AdminDashboard/LibraryManagement/PaymentManagement";
-
 import ReportView from "../Pages/AdminDashboard/LibraryManagement/ReportView";
 import ErrorPage from "../Pages/shared/ErrorMassage/ErrorPage";
+import BlogsPage from "../Pages/AdminDashboard/MainHomePage/BlogsPage";
+import QuotesPage from "../Pages/AdminDashboard/MainHomePage/QuotesPage";
+import BlogsAll from "../Pages/Home/Blogs/BlogsAll";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement:<ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -50,6 +52,10 @@ const routes = createBrowserRouter([
         path: "coaching",
         element: <Coaching />,
       },
+      {
+        path: "blogs",
+        element: <BlogsAll />,
+      },
     ],
   },
 
@@ -69,6 +75,16 @@ const routes = createBrowserRouter([
       {
         path: "allusers",
         element: <AllUsers />,
+      },
+      // For homepage
+      {
+        path: "blogs",
+        element: <BlogsPage />,
+      },
+
+      {
+        path: "quotes",
+        element: <QuotesPage />,
       },
       // For Library management
       {

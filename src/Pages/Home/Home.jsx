@@ -2,7 +2,9 @@ import DonationPage from "../../Components/DonationPage";
 import FeaturedBooks from "../../Components/FeaturedBooks";
 import Hero from "../../Components/Hero";
 import Testimonials from "../../Components/Testimonials";
+
 import Books from "./Books/Books";
+import LastPage from "./lastPage";
 
 const Home = () => {
   return (
@@ -10,6 +12,7 @@ const Home = () => {
       <Hero />
       <Books />
       <FeaturedBooks />
+     <LastPage />
       <Testimonials />
       <DonationPage />
     </div>
