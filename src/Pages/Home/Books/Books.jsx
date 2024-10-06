@@ -52,7 +52,7 @@ const Books = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="p-4 bg-gradient-to-r from-blue-100 to-indigo-100 mt-6 md:m-2  rounded-lg"
+      className=" bg-gradient-to-r from-blue-50 to-indigo-50 p-4 mt-6 md:m-2  rounded-lg"
     >
       <Space direction="vertical" size="large" className="w-full">
         <motion.div

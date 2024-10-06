@@ -1,8 +1,8 @@
 // src/components/LibraryStatistics.js
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { message } from "antd";
+import { message, Spin, Card, Row, Col, Statistic } from "antd";
+import { UserOutlined, BookOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { fetchUsers } from "../redux/slices/userSlice";
 
@@ -22,7 +22,7 @@ const LibraryStatistics = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(" api/v1/books");
+        const response = await axios.get("api/v1/books");
         setBooks(response.data);
       } catch (error) {
         console.error("Failed to fetch books", error);
@@ -34,33 +34,54 @@ const LibraryStatistics = () => {
 
     fetchBooks();
   }, []);
+
   return (
-    <div className="py-12 bg-gray-50 bg-opacity-50 m-3 rounded-md">
-      <h2 className="text-3xl text-center font-bold mb-8 underline">
-        Library Statistics
+    <div className="py-12 bg-gradient-to-r from-blue-100 to-purple-100 m-3 rounded-lg shadow-lg">
+      <h2 className="text-4xl text-center font-bold mb-8 text-indigo-700">
+        Library Statisticsd
       </h2>
-      <div className="flex justify-around">
-        <div className="text-center">
-          {users ? (
-            loading ? (
-              <p>Loading users...</p>
-            ) : error ? (
-              <p className="text-red-400">Failed to load users</p>
+      <Row gutter={16} justify="center">
+        <Col xs={24} sm={12} md={8}>
+          <Card
+            hoverable
+            className="text-center shadow-md transition-all duration-300 transform hover:scale-105"
+          >
+            {users ? (
+              loading ? (
+                <Spin size="large" />
+              ) : error ? (
+                <p className="text-red-500">Failed to load users</p>
+              ) : (
+                <Statistic
+                  title="Registered Users"
+                  value={users.length}
+                  prefix={<UserOutlined />}
+                  valueStyle={{ color: "#3f8600", fontSize: "2.5rem" }}
+                />
+              )
             ) : (
-              <h3 className="text-5xl font-bold">{users.length}</h3>
-            )
-          ) : (
-            <p className="text-left text-red-400">
-              Login First If you want to see
-            </p>
-          )}
-          <p>Registered Users</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-5xl font-bold">{books.length}</h3>
-          <p>Total Books</p>
-        </div>
-      </div>
+              <p className="text-red-500">Login First If you want to see</p>
+            )}
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card
+            hoverable
+            className="text-center shadow-md transition-all duration-300 transform hover:scale-105"
+          >
+            {loadingBooks ? (
+              <Spin size="large" />
+            ) : (
+              <Statistic
+                title="Total Books"
+                value={books.length}
+                prefix={<BookOutlined />}
+                valueStyle={{ color: "#1890ff", fontSize: "2.5rem" }}
+              />
+            )}
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };
