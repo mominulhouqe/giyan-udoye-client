@@ -33,6 +33,14 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
         path: "profile",
         element: <UserProfile />,
       },
@@ -118,14 +126,6 @@ const routes = createBrowserRouter([
         element: <ManageTutor />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
 ]);
 export default routes;
