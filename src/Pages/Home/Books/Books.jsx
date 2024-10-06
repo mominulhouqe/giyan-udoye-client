@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+/* eslint-disable no-undef */
+import { useEffect, useState } from "react";
 import BookCard from "../../../Components/BookCard";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Spin } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Button, Spin, Input, Typography, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../../redux/slices/booksSlice";
+import { SearchOutlined, BookOutlined } from "@ant-design/icons";
+
+const { Title } = Typography;
 
 const Books = () => {
   const [search, setSearch] = useState("");
@@ -12,6 +15,7 @@ const Books = () => {
   const dispatch = useDispatch();
   const { books, loading, error } = useSelector((state) => state.books);
   const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
@@ -33,23 +37,35 @@ const Books = () => {
       navigate("/bookList");
     }
   };
+
   if (loading) {
-    return <Spin tip="Loading..."></Spin>;
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Spin size="large" tip="Loading books..." />
+      </div>
+    );
   }
+
   return (
-    <div className="p-6 bg-gray-50 bg-opacity-50 m-3 rounded-md">
-      <input
-        type="text"
-        placeholder="Search books"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-6 py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="p-8 bg-gradient-to-r from-blue-50 to-indigo-50 m-4 rounded-lg shadow-lg">
+      <Space direction="vertical" size="large" className="w-full">
+        <Title level={2} className="text-center text-indigo-700">
+          <BookOutlined className="mr-2" />
+          Explore Our Collection
+        </Title>
+
+        <Input
+          size="large"
+          placeholder="Search books"
+          prefix={<SearchOutlined />}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mb-6 shadow-sm hover:shadow-md transition-shadow duration-300"
+        />
+
         {filteredBooks.length > 0 ? (
-          filteredBooks
-            .slice(0, 8)
-            .map((book) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredBooks.slice(0, 8).map((book) => (
               <BookCard
                 key={book._id}
                 title={book.title}
@@ -58,16 +74,27 @@ const Books = () => {
                 image={book.image}
                 id={book._id}
               />
-            ))
+            ))}
+          </div>
         ) : (
-          <p className="text-center col-span-full">No books found</p>
+          <div className="text-center py-8">
+            <Title level={4} className="text-gray-500">
+              No books found
+            </Title>
+          </div>
         )}
-      </div>
-      <div className="flex justify-end my-3">
-        <Button onClick={handleSeeAllClick}>See all</Button>
-      </div>
 
-      <hr />
+        <div className="flex justify-end mt-6">
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleSeeAllClick}
+            className="bg-indigo-600 hover:bg-indigo-700 border-none shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            See All Books
+          </Button>
+        </div>
+      </Space>
     </div>
   );
 };
