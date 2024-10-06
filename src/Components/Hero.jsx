@@ -9,7 +9,7 @@ const Hero = () => (
     className="relative bg-cover bg-center bg-no-repeat text-white py-20"
     style={{
       backgroundImage: `url('${img}')`,
-      height: "calc(100vh - 30vh)",
+      height: "calc(100vh - 15vh)",
     }}
   >
     <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"></div>

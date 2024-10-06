@@ -8,13 +8,13 @@ const { Content } = Layout;
 
 function App() {
   return (
-    <Layout className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
+    <div className="">
       <Navbar />
       <Content className="container mx-auto p-4 flex-grow">
         <Outlet />
       </Content>
       <Footer />
-    </Layout>
+    </div>
   );
 }
 

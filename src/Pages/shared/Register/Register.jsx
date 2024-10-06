@@ -62,114 +62,116 @@ const Register = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="max-w-lg w-full mx-auto mt-4 border rounded-lg p-6 shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100"
-    >
-      <motion.h1
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-3xl font-bold mb-6 text-center text-indigo-700"
+    <div className="bg-gradient-to-br from-purple-600 to-indigo-700 w-full min-h-screen flex justify-center items-center p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-lg w-full mx-auto mt-4 border rounded-lg p-6 shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100"
       >
-        Join Our Community
-      </motion.h1>
-      <Form onFinish={onFinish} layout="vertical">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <Form.Item
-            name="name"
-            label="Name"
-            rules={[{ required: true, message: "Please enter your name" }]}
-          >
-            <Input placeholder="Enter your name" className="rounded-md" />
-          </Form.Item>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              { required: true, message: "Please enter your email" },
-              { type: "email", message: "Invalid email format" },
-            ]}
-          >
-            <Input placeholder="Enter your email" className="rounded-md" />
-          </Form.Item>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              { required: true, message: "Please enter your password" },
-              { min: 6, message: "Password must be at least 6 characters" },
-            ]}
-          >
-            <Input.Password
-              placeholder="Enter your password"
-              className="rounded-md"
-            />
-          </Form.Item>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <Form.Item label="Profile Image">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImage}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-            />
-          </Form.Item>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-        >
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 rounded-md h-10 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-            >
-              Register
-            </Button>
-          </Form.Item>
-        </motion.div>
-        <motion.div
+        <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-center"
+          transition={{ delay: 0.2 }}
+          className="text-3xl font-bold mb-6 text-center text-indigo-700"
         >
-          <Link
-            to="/login"
-            className="text-indigo-600 hover:text-indigo-800 transition-colors duration-300"
+          Join Our Community
+        </motion.h1>
+        <Form onFinish={onFinish} layout="vertical">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
           >
-            Already have an account? Log in
-          </Link>
-        </motion.div>
-      </Form>
-    </motion.div>
+            <Form.Item
+              name="name"
+              label="Name"
+              rules={[{ required: true, message: "Please enter your name" }]}
+            >
+              <Input placeholder="Enter your name" className="rounded-md" />
+            </Form.Item>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[
+                { required: true, message: "Please enter your email" },
+                { type: "email", message: "Invalid email format" },
+              ]}
+            >
+              <Input placeholder="Enter your email" className="rounded-md" />
+            </Form.Item>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[
+                { required: true, message: "Please enter your password" },
+                { min: 6, message: "Password must be at least 6 characters" },
+              ]}
+            >
+              <Input.Password
+                placeholder="Enter your password"
+                className="rounded-md"
+              />
+            </Form.Item>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Form.Item label="Profile Image">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage}
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              />
+            </Form.Item>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+          >
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                className="w-full bg-indigo-600 hover:bg-indigo-700 rounded-md h-10 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              >
+                Register
+              </Button>
+            </Form.Item>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-center"
+          >
+            <Link
+              to="/login"
+              className="text-indigo-600 hover:text-indigo-800 transition-colors duration-300"
+            >
+              Already have an account? Log in
+            </Link>
+          </motion.div>
+        </Form>
+      </motion.div>
+    </div>
   );
 };
 
