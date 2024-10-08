@@ -1,7 +1,21 @@
-// src/components/PaymentManagement.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Button, Form, Input, Modal, notification } from "antd";
+import {
+  Table,
+  Button,
+  Form,
+  Input,
+  Modal,
+  notification,
+  Typography,
+  Card,
+  Space,
+  Row,
+  Col,
+} from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+
+const { Title } = Typography;
 
 const PaymentManagement = () => {
   const [payments, setPayments] = useState([]);
@@ -21,9 +35,10 @@ const PaymentManagement = () => {
       setPayments(response.data);
     } catch (error) {
       console.error("Error fetching payments:", error);
+      notification.error({ message: "Failed to fetch payments" });
     }
   };
-
+  console.log(payments);
   const handleAddPayment = async (values) => {
     try {
       if (editingPayment) {
@@ -45,6 +60,7 @@ const PaymentManagement = () => {
       notification.error({ message: "Failed to save payment" });
     }
   };
+
   const handleEdit = (record) => {
     setEditingPayment(record);
     form.setFieldsValue(record);
@@ -66,8 +82,13 @@ const PaymentManagement = () => {
 
   const columns = [
     { title: "ID", dataIndex: "_id", key: "_id" },
+    { title: "Name", dataIndex: "name", key: "name" },
     { title: "Amount", dataIndex: "amount", key: "amount" },
-    { title: "Payment Date", dataIndex: "paymentDate", key: "paymentDate" },
+    {
+      title: "Payment Date",
+      dataIndex: "paymentDate",
+      key: "paymentDate",
+    },
     {
       title: "Payment Method",
       dataIndex: "paymentMethod",
@@ -81,65 +102,104 @@ const PaymentManagement = () => {
     {
       title: "Actions",
       key: "actions",
-      render: (text, record) => (
-        <>
-          <Button onClick={() => handleEdit(record)}>Edit</Button>
+      render: (_, record) => (
+        <Space>
           <Button
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+            type="primary"
+            ghost
+          >
+            Edit
+          </Button>
+          <Button
+            icon={<DeleteOutlined />}
             onClick={() => handleDelete(record._id)}
-            type="danger"
-            style={{ marginLeft: 8 }}
+            danger
           >
             Delete
           </Button>
-        </>
+        </Space>
       ),
     },
   ];
 
   return (
-    <div>
-      <Button
-        type="primary"
-        onClick={() => {
-          setEditingPayment(null);
-          form.resetFields();
-          setIsModalVisible(true);
-        }}
-      >
-        Add Payment
-      </Button>
+    <Card>
+      <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
+        <Col>
+          <Title level={2}>Payment Management</Title>
+        </Col>
+        <Col>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setEditingPayment(null);
+              form.resetFields();
+              setIsModalVisible(true);
+            }}
+          >
+            Add Payment
+          </Button>
+        </Col>
+      </Row>
       <Table
-    
         dataSource={payments}
         columns={columns}
         rowKey="_id"
+        scroll={{ x: "max-content" }}
       />
 
       <Modal
         title={editingPayment ? "Edit Payment" : "Add Payment"}
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
-        onOk={() => form.submit()}
+        footer={null}
       >
         <Form form={form} layout="vertical" onFinish={handleAddPayment}>
-          <Form.Item name="memberId" label="Member ID">
+          <Form.Item
+            name="memberId"
+            label="Member ID"
+            rules={[{ required: true }]}
+          >
             <Input />
           </Form.Item>
-          <Form.Item name="amount" label="Amount">
+          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="amount" label="Amount" rules={[{ required: true }]}>
             <Input type="number" />
           </Form.Item>
-          <Form.Item name="paymentDate" label="Payment Date">
+          <Form.Item
+            name="paymentDate"
+            label="Payment Date"
+            rules={[{ required: true }]}
+          >
             <Input type="date" />
           </Form.Item>
-          <Form.Item name="paymentMethod" label="Payment Method">
+          <Form.Item
+            name="paymentMethod"
+            label="Payment Method"
+            rules={[{ required: true }]}
+          >
             <Input />
           </Form.Item>
-          <Form.Item name="transactionId" label="Transaction ID">
+          <Form.Item
+            name="transactionId"
+            label="Transaction ID"
+            rules={[{ required: true }]}
+          >
             <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block>
+              {editingPayment ? "Update Payment" : "Add Payment"}
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+    </Card>
   );
 };
 

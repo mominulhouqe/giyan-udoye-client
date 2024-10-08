@@ -1,7 +1,22 @@
 // src/components/ReportView.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Form, Input, Select, Button, Table, message } from "antd";
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  Table,
+  message,
+  Typography,
+  Card,
+  Space,
+  Divider,
+  Row,
+  Col,
+} from "antd";
+
+const { Title, Text } = Typography;
 
 const ReportView = () => {
   const [report, setReport] = useState(null);
@@ -32,6 +47,7 @@ const ReportView = () => {
           params: { year: values.year },
         }
       );
+      console.log(response.data);
       setReport(response.data);
     } catch (error) {
       message.error("Error fetching yearly report.");
@@ -41,72 +57,104 @@ const ReportView = () => {
 
   const columns = [
     { title: "Member ID", dataIndex: ["memberId", "_id"], key: "memberId" },
+    { title: "Name", dataIndex: ["memberId", "name"], key: "name" },
     { title: "Amount", dataIndex: "amount", key: "amount" },
     { title: "Payment Date", dataIndex: "paymentDate", key: "paymentDate" },
   ];
 
-
   return (
-    <div>
-      <h2>Reports</h2>
+    <Card className="border-0 p-0 m-0 w-full">
+      <Title level={2}>Reports</Title>
+      <Divider />
+      <Space direction="vertical" size="large" style={{ width: "100%" }}>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Card title="Monthly Report" size="small">
+              <Form layout="vertical" onFinish={handleFetchMonthlyReport}>
+                <Form.Item
+                  name="month"
+                  label="Month"
+                  rules={[{ required: true }]}
+                >
+                  <Select style={{ width: "100%" }}>
+                    {[
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December",
+                    ].map((month) => (
+                      <Select.Option key={month} value={month}>
+                        {month}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="year"
+                  label="Year"
+                  rules={[{ required: true }]}
+                >
+                  <Input type="number" />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" block>
+                    Get Monthly Report
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Card>
+          </Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Card title="Yearly Report" size="small">
+              <Form layout="vertical" onFinish={handleFetchYearlyReport}>
+                <Form.Item
+                  name="year"
+                  label="Year"
+                  rules={[{ required: true }]}
+                >
+                  <Input type="number" />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" block>
+                    Get Yearly Report
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
 
-      <Form layout="inline" onFinish={handleFetchMonthlyReport}>
-        <Form.Item
-          className="w-44"
-          name="month"
-          label="Month"
-          rules={[{ required: true }]}
-        >
-          <Select>
-            <Select.Option value="January">January</Select.Option>
-            <Select.Option value="February">February</Select.Option>
-            <Select.Option value="March">March</Select.Option>
-            <Select.Option value="April">April</Select.Option>
-            <Select.Option value="May">May</Select.Option>
-            <Select.Option value="Jun">Jun</Select.Option>
-            <Select.Option value="July">July</Select.Option>
-            <Select.Option value="August">August</Select.Option>
-            <Select.Option value="September">September</Select.Option>
-            <Select.Option value="October">October</Select.Option>
-            <Select.Option value="Novbember">Novbember</Select.Option>
-            <Select.Option value="December">December</Select.Option>
-            {/* Add all months */}
-          </Select>
-        </Form.Item>
-        <Form.Item name="year" label="Year" rules={[{ required: true }]}>
-          <Input type="number" />
-        </Form.Item>
-        <Button type="primary" htmlType="submit">
-          Get Monthly Report
-        </Button>
-      </Form>
-
-      <Form layout="inline" onFinish={handleFetchYearlyReport} className="mt-4">
-        <Form.Item name="year" label="Year" rules={[{ required: true }]}>
-          <Input type="number" />
-        </Form.Item>
-        <Button type="primary" htmlType="submit">
-          Get Yearly Report
-        </Button>
-      </Form>
-
-      {report && (
-        <div className="mt-4">
-          <h3>
-            {report.month
-              ? `Monthly Report: ${report.month} ${report.year}`
-              : `Yearly Report: ${report.year}`}
-          </h3>
-          <p>Total Amount: {report.totalAmount}</p>
-          <Table
-            dataSource={report.payments}
-            columns={columns}
-            loading={loading}
-            rowKey="_id"
-          />
-        </div>
-      )}
-    </div>
+        {report && (
+          <Card
+            title={
+              <Title level={4}>
+                {report.month
+                  ? `Monthly Report: ${report.month} ${report.year}`
+                  : `Yearly Report: ${report.year}`}
+              </Title>
+            }
+          >
+            <Text strong>Total Amount: {report.totalAmount}</Text>
+            <Table
+              dataSource={report.payments}
+              columns={columns}
+              loading={loading}
+              rowKey="_id"
+              style={{ marginTop: 16 }}
+              scroll={{ x: true }}
+            />
+          </Card>
+        )}
+      </Space>
+    </Card>
   );
 };
 

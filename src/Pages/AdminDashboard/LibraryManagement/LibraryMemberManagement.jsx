@@ -1,6 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Table, Button, Form, Input, Modal, message } from 'antd';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Table,
+  Button,
+  Form,
+  Input,
+  Modal,
+  message,
+  Row,
+  Col,
+  Card,
+  Typography,
+} from "antd";
+
+const { Title } = Typography;
 
 const LibraryMemberManagement = () => {
   const [members, setMembers] = useState([]);
@@ -14,10 +27,10 @@ const LibraryMemberManagement = () => {
 
   const fetchMembers = async () => {
     try {
-      const response = await axios.get('/api/library-members');
+      const response = await axios.get("/api/library-members");
       setMembers(response.data);
     } catch (error) {
-      message.error('Failed to fetch members');
+      message.error("Failed to fetch members");
     }
   };
 
@@ -26,26 +39,26 @@ const LibraryMemberManagement = () => {
       if (currentMember) {
         // Update member
         await axios.put(`/api/library-members/${currentMember._id}`, values);
-        message.success('Library member updated successfully');
+        message.success("Library member updated successfully");
       } else {
         // Add new member
-        await axios.post('/api/library-members', values);
-        message.success('Library member added successfully');
+        await axios.post("/api/library-members", values);
+        message.success("Library member added successfully");
       }
       fetchMembers();
       setIsModalVisible(false);
     } catch (error) {
-      message.error('Failed to save member');
+      message.error("Failed to save member");
     }
   };
 
   const handleDeleteMember = async (id) => {
     try {
       await axios.delete(`/api/library-members/${id}`);
-      message.success('Library member deleted successfully');
+      message.success("Library member deleted successfully");
       fetchMembers();
     } catch (error) {
-      message.error('Failed to delete member');
+      message.error("Failed to delete member");
     }
   };
 
@@ -62,74 +75,97 @@ const LibraryMemberManagement = () => {
   };
 
   const columns = [
-    { title: 'Name', dataIndex: 'name', key: 'name' },
-    { title: 'Email', dataIndex: 'email', key: 'email' },
-    { title: 'Phone', dataIndex: 'phone', key: 'phone' },
-    { title: 'Image', dataIndex: 'image', key: 'image', render: (text) => <img src={text} alt="member" style={{ width: 50, height: 50 }} /> },
+    { title: "Name", dataIndex: "name", key: "name", responsive: ["md"] },
+    { title: "Email", dataIndex: "email", key: "email", responsive: ["lg"] },
+    { title: "Phone", dataIndex: "phone", key: "phone", responsive: ["xl"] },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      responsive: ["xxl"],
+      render: (text) => (
+        <img src={text} alt="member" style={{ width: 50, height: 50 }} />
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
       render: (_, record) => (
-        <div>
-          <Button type="link" onClick={() => handleEditClick(record)}>Edit</Button>
-          <Button type="link" danger onClick={() => handleDeleteMember(record._id)}>Delete</Button>
-        </div>
+        <Row gutter={[8, 8]}>
+          <Col>
+            <Button type="link" onClick={() => handleEditClick(record)}>
+              Edit
+            </Button>
+          </Col>
+          <Col>
+            <Button
+              type="link"
+              danger
+              onClick={() => handleDeleteMember(record._id)}
+            >
+              Delete
+            </Button>
+          </Col>
+        </Row>
       ),
     },
   ];
 
   return (
-    <div>
-      <Button type="primary" onClick={handleAddClick} style={{ marginBottom: 16 }}>
-        Add Library Member
-      </Button>
-      <Table       scroll={{ x: "100%", y: 500 }} dataSource={members} columns={columns} rowKey="_id" />
+    <Card className="border-0 m-0 p-0 shadow-none">
+      <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
+        <Col>
+          <Title level={2}>Library Member Management</Title>
+        </Col>
+        <Col>
+          <Button type="primary" onClick={handleAddClick}>
+            Add Library Member
+          </Button>
+        </Col>
+      </Row>
+      <Table
+        dataSource={members}
+        columns={columns}
+        rowKey="_id"
+        scroll={{ x: "max-content" }}
+        responsive
+      />
 
       <Modal
-        title={currentMember ? 'Edit Library Member' : 'Add Library Member'}
+        title={currentMember ? "Edit Library Member" : "Add Library Member"}
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
       >
-        <Form
-          form={form}
-          onFinish={handleAddOrUpdateMember}
-          layout="vertical"
-        >
+        <Form form={form} onFinish={handleAddOrUpdateMember} layout="vertical">
           <Form.Item
             name="name"
             label="Name"
-            rules={[{ required: true, message: 'Please enter the name' }]}
+            rules={[{ required: true, message: "Please enter the name" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="email"
             label="Email"
-            rules={[{ required: true, message: 'Please enter the email' }]}
+            rules={[{ required: true, message: "Please enter the email" }]}
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            name="phone"
-            label="Phone"
-          >
+          <Form.Item name="phone" label="Phone">
             <Input />
           </Form.Item>
-          <Form.Item
-            name="image"
-            label="Image URL"
-          >
+          <Form.Item name="image" label="Image URL">
             <Input />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              {currentMember ? 'Update' : 'Add'}
+              {currentMember ? "Update" : "Add"}
             </Button>
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+    </Card>
   );
 };
 

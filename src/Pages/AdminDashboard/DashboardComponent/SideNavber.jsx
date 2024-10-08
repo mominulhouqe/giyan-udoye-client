@@ -3,16 +3,19 @@ import {
   AppstoreOutlined,
   BookOutlined,
   MenuOutlined,
-  UserAddOutlined,
+  UserOutlined,
   HistoryOutlined,
   HomeFilled,
   BackwardFilled,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Button, Menu, Drawer, message } from "antd";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Button, Menu, Drawer, message, Avatar, Typography } from "antd";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, logout } from "../../../redux/slices/authSlice";
+
+const { Title, Text } = Typography;
 
 const items = [
   {
@@ -24,16 +27,16 @@ const items = [
     key: "Home1",
     icon: <HomeFilled />,
     label: <NavLink to="/admin">Home</NavLink>,
-    children:[
+    children: [
       {
-        key:"h1",
-        label:<NavLink to="blogs">Blog Management</NavLink>
+        key: "h1",
+        label: <NavLink to="blogs">Blog Management</NavLink>,
       },
       {
-        key:"h3",
-        label:<NavLink to="quotes">Quotes Management</NavLink>
+        key: "h3",
+        label: <NavLink to="quotes">Quotes Management</NavLink>,
       },
-    ]
+    ],
   },
   {
     key: "sub1",
@@ -41,9 +44,18 @@ const items = [
     icon: <BookOutlined />,
     children: [
       { key: "1", label: <NavLink to="/admin">All Books</NavLink> },
-      { key: "2", label: <NavLink to="library-member">Add Library Members</NavLink> },
-      { key: "3", label: <NavLink to="payment-member">Payment Library Members</NavLink> },
-      { key: "4", label: <NavLink to="payment-report">Payment History</NavLink> },
+      {
+        key: "2",
+        label: <NavLink to="library-member">Add Library Members</NavLink>,
+      },
+      {
+        key: "3",
+        label: <NavLink to="payment-member">Payment Library Members</NavLink>,
+      },
+      {
+        key: "4",
+        label: <NavLink to="payment-report">Payment History</NavLink>,
+      },
     ],
   },
   {
@@ -51,9 +63,18 @@ const items = [
     label: "Coaching Management",
     icon: <AppstoreOutlined />,
     children: [
-      { key: "6c", label: <NavLink to="student-management">Student Management</NavLink> },
-      { key: "7c", label: <NavLink to="subject-management">Subject Management</NavLink> },
-      { key: "8c", label: <NavLink to="tutor-management">Tutor Management</NavLink> },
+      {
+        key: "6c",
+        label: <NavLink to="student-management">Student Management</NavLink>,
+      },
+      {
+        key: "7c",
+        label: <NavLink to="subject-management">Subject Management</NavLink>,
+      },
+      {
+        key: "8c",
+        label: <NavLink to="tutor-management">Tutor Management</NavLink>,
+      },
       { key: "9c", label: "Blocked Users" },
     ],
   },
@@ -65,13 +86,12 @@ const items = [
 ];
 
 const SideNavbar = () => {
-  const [current, setCurrent] = useState("1");
   const [drawerVisible, setDrawerVisible] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const { user, loading, error } = useSelector((state) => state.auth);
+  const { user, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!user) {
@@ -91,10 +111,6 @@ const SideNavbar = () => {
     message.success("Successfully logged out");
   };
 
-  const onClick = (e) => {
-    setCurrent(e.key);
-  };
-
   const showDrawer = () => {
     setDrawerVisible(true);
   };
@@ -103,82 +119,75 @@ const SideNavbar = () => {
     setDrawerVisible(false);
   };
 
+  const UserProfileSection = () => (
+    <div className="flex flex-col items-center p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg mb-4">
+      <Link to="/user-profile">
+        <motion.div whileHover={{ scale: 1.1 }} className="mb-2">
+          <Avatar
+            size={64}
+            src={user?.profileImage}
+            icon={<UserOutlined />}
+            className="border-2 border-white"
+          />
+        </motion.div>
+      </Link>
+      <Title level={4} className="text-white m-0">
+        {user?.name || "User Name"}
+      </Title>
+      <Text className="text-white opacity-75">
+        Role: {user?.role || "User"}
+      </Text>
+      <Button
+        type="default"
+        icon={<LogoutOutlined />}
+        onClick={handleLogout}
+        className="mt-2 hover:bg-red-500 hover:text-white transition-colors"
+      >
+        Logout
+      </Button>
+    </div>
+  );
+
   return (
     <>
-      <div className="lg:min-h-screen bg-gray-100 shadow-xl">
+      <div className="lg:min-h-screen bg-gray-100">
         {/* Mobile Menu Button */}
-        <div className="lg:hidden p-">
+        <div className="lg:hidden p-4">
           <Button
             type="primary"
-            shape="round"
+            shape="circle"
             icon={<MenuOutlined />}
             onClick={showDrawer}
-            className="text-white bg-blue-700"
-          >
-          
-          </Button>
+            className="bg-blue-500 hover:bg-blue-600"
+          />
         </div>
 
         {/* Drawer for Mobile */}
         <Drawer
-          title="Menu"
+          title="Dashboard Menu"
           placement="left"
           onClose={onClose}
           open={drawerVisible}
-          width={256}
-          bodyStyle={{ backgroundColor: "#f0f2f5" }}
+          width={300}
+          bodyStyle={{ padding: 0 }}
         >
+          <UserProfileSection />
           <Menu
-            defaultSelectedKeys={["1"]}
-            onClick={onClick}
-            selectedKeys={[current]}
             mode="inline"
+            selectedKeys={[location.pathname]}
             items={items}
+            className="border-r-0"
           />
         </Drawer>
 
         {/* Desktop Sidebar */}
-        <div className="hidden lg:block">
-          {/* User Profile Section */}
-          <div className="flex flex-col items-center p-2 bg-white shadow-lg rounded-lg mt-4 mx-4">
-            <Link to="/user-profile">
-              <motion.div
-                className="rounded-full w-24 h-24 overflow-hidden border-4 border-blue-500 shadow-lg"
-                whileHover={{ scale: 1.1 }}
-              >
-                {user?.profileImage ? (
-                  <img
-                    src={user.profileImage}
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="rounded-full bg-gray-200 w-full h-full flex items-center justify-center">
-                    <UserAddOutlined className="text-4xl text-gray-500" />
-                  </div>
-                )}
-              </motion.div>
-            </Link>
-            <span className="mt-4 text-xl font-semibold text-gray-800">{user?.name || "User Name"}</span>
-            <span className="text-sm text-gray-500">Role: {user?.role || "User"}</span>
-            <Button
-              type="primary"
-              danger
-              onClick={handleLogout}
-              className="mt-2"
-            >
-              Logout
-            </Button>
-          </div>
-
-          {/* Menu */}
+        <div className="hidden lg:block w-64 fixed z-50 h-full overflow-y-auto bg-white shadow-lg">
+          <UserProfileSection />
           <Menu
-            defaultSelectedKeys={["1"]}
-            onClick={onClick}
-            selectedKeys={[current]}
             mode="inline"
+            selectedKeys={[location.pathname]}
             items={items}
-            className="mt-4 bg-white shadow-lg rounded-lg mx-4"
+            className="border-r-0"
           />
         </div>
       </div>

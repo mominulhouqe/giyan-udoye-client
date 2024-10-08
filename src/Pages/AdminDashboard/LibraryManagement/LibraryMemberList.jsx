@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Button, Modal, Form, Input, notification } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Input,
+  notification,
+  Space,
+  Typography,
+} from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+
+const { Title } = Typography;
 
 const LibraryMemberList = () => {
   const [members, setMembers] = useState([]);
@@ -21,6 +32,7 @@ const LibraryMemberList = () => {
       setMembers(response.data);
     } catch (error) {
       console.error("Error fetching members:", error);
+      notification.error({ message: "Failed to fetch members" });
     }
   };
 
@@ -66,7 +78,7 @@ const LibraryMemberList = () => {
   };
 
   const columns = [
-    { title: "ID", dataIndex: "_id", key: "_id" }, // Ensure this matches the field in your data
+    { title: "ID", dataIndex: "_id", key: "_id" },
     { title: "Name", dataIndex: "name", key: "name" },
     { title: "Email", dataIndex: "email", key: "email" },
     { title: "Phone", dataIndex: "phone", key: "phone" },
@@ -84,51 +96,67 @@ const LibraryMemberList = () => {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
-        <>
-          <Button onClick={() => handleEdit(record)}>Edit</Button>
+        <Space>
           <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          >
+            Edit
+          </Button>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
             onClick={() => handleDelete(record._id)}
-            type="danger"
-            style={{ marginLeft: 8 }}
           >
             Delete
           </Button>
-        </>
+        </Space>
       ),
     },
   ];
 
   return (
-    <div>
-      <Button
-        type="primary"
-        icon={<PlusOutlined />}
-        onClick={() => {
-          setEditingMember(null);
-          form.resetFields();
-          setIsModalVisible(true);
-        }}
-      >
-        Add Member
-      </Button>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <div className="flex justify-between items-center mb-6">
+        <Title level={2}>Library Members</Title>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => {
+            setEditingMember(null);
+            form.resetFields();
+            setIsModalVisible(true);
+          }}
+          size="large"
+        >
+          Add Member
+        </Button>
+      </div>
       <Table
-      
         dataSource={members}
         columns={columns}
         rowKey="_id"
+        pagination={{ pageSize: 10 }}
+        scroll={{ x: true }}
       />
 
       <Modal
         title={editingMember ? "Edit Member" : "Add Member"}
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
-        onOk={() => form.submit()}
+        footer={null}
+        width={600}
       >
         <Form form={form} layout="vertical" onFinish={handleAddMember}>
           <Form.Item name="name" label="Name" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="email" label="Email" rules={[{ required: true }]}>
+          <Form.Item
+            name="email"
+            label="Email"
+            rules={[{ required: true, type: "email" }]}
+          >
             <Input />
           </Form.Item>
           <Form.Item name="phone" label="Phone" rules={[{ required: true }]}>
@@ -137,7 +165,7 @@ const LibraryMemberList = () => {
           <Form.Item
             name="subscriptionFee"
             label="Subscription Fee"
-            rules={[{ required: true }]}
+            rules={[{ required: true, type: "number" }]}
           >
             <Input type="number" />
           </Form.Item>
@@ -147,6 +175,14 @@ const LibraryMemberList = () => {
             rules={[{ required: true }]}
           >
             <Input type="date" />
+          </Form.Item>
+          <Form.Item>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                {editingMember ? "Update" : "Add"}
+              </Button>
+              <Button onClick={() => setIsModalVisible(false)}>Cancel</Button>
+            </Space>
           </Form.Item>
         </Form>
       </Modal>

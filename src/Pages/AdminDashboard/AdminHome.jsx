@@ -1,19 +1,31 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Table, Button, message, Popconfirm } from "antd";
+import {
+  Table,
+  Button,
+  message,
+  Popconfirm,
+  Typography,
+  Space,
+  Card,
+} from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 import BookForm from "./DashboardComponent/BookForm";
+
+const { Title } = Typography;
+
 const AdminHome = () => {
   const [books, setBooks] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentBook, setCurrentBook] = useState(null);
-  const [addmember, setAddmember] = useState(null);
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const res = await axios.get(
           "https://giyan-udoye.vercel.app/api/v1/books"
-        ); // Ensure this URL is correct
+        );
         if (Array.isArray(res.data)) {
           setBooks(res.data);
         } else {
@@ -21,7 +33,7 @@ const AdminHome = () => {
         }
       } catch (err) {
         message.error("Failed to fetch books");
-        console.error(err); // Log the error
+        console.error(err);
       }
     };
 
@@ -32,10 +44,6 @@ const AdminHome = () => {
     setCurrentBook(book);
     setIsModalVisible(true);
   };
-  const showModalAddMember = (member = {}) => {
-    setAddmember(member);
-    setIsModalVisible(true);
-  };
 
   const handleOk = async (updatedBook) => {
     try {
@@ -43,20 +51,20 @@ const AdminHome = () => {
         await axios.put(
           `https://giyan-udoye.vercel.app/api/v1/books/${updatedBook._id}`,
           updatedBook
-        ); // Ensure this URL is correct
+        );
         message.success("Book updated successfully");
       } else {
         await axios.post(
           "https://giyan-udoye.vercel.app/api/v1/books",
           updatedBook
-        ); // Ensure this URL is correct
+        );
         message.success("Book added successfully");
       }
       setIsModalVisible(false);
       setCurrentBook(null);
       const res = await axios.get(
         "https://giyan-udoye.vercel.app/api/v1/books"
-      ); // Ensure this URL is correct
+      );
       setBooks(res.data);
     } catch (err) {
       message.error("Failed to save book");
@@ -79,35 +87,37 @@ const AdminHome = () => {
   };
 
   return (
-    <div>
-      <h2 className="py-4 mb-2 text-2xl font-bold underline text-center bg-gray-200">
-        {" "}
-        Books Page
-      </h2>
-      <Button type="primary" onClick={() => showModal()}>
-        Add Book
+    <Card className="admin-home-card">
+      <Title level={2} className="text-center mb-6">
+        Book Management
+      </Title>
+      <Button
+        type="primary"
+        icon={<PlusOutlined />}
+        onClick={() => showModal()}
+        className="mb-4"
+      >
+        Add New Book
       </Button>
-      {/* <Button type="primary" onClick={() => showModalAddMember()}>
-        Add Member
-      </Button> */}
 
       <Table
-        scroll={{ x: "100%", y: 500 }}
         dataSource={books}
         rowKey="_id"
-        className="mt-4 overflow-x-auto"
+        className="books-table"
+        pagination={{ pageSize: 10 }}
+        scroll={{ x: "max-content" }}
       >
         <Table.Column title="Title" dataIndex="title" key="title" />
         <Table.Column title="Author" dataIndex="author" key="author" />
         <Table.Column
-          title="Image"
+          title="Cover"
           dataIndex="image"
           key="image"
           render={(text, record) => (
             <img
               src={record.image}
               alt={record.title}
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "50px", height: "70px", objectFit: "cover" }}
             />
           )}
         />
@@ -115,10 +125,11 @@ const AdminHome = () => {
           title="Actions"
           key="actions"
           render={(text, record) => (
-            <div>
+            <Space size="middle">
               <Button
+                type="primary"
+                icon={<EditOutlined />}
                 onClick={() => showModal(record)}
-                style={{ marginRight: "8px" }}
               >
                 Edit
               </Button>
@@ -128,13 +139,14 @@ const AdminHome = () => {
                 okText="Yes"
                 cancelText="No"
               >
-                <Button type="danger">Delete</Button>
+                <Button type="danger" icon={<DeleteOutlined />}>
+                  Delete
+                </Button>
               </Popconfirm>
-            </div>
+            </Space>
           )}
         />
       </Table>
-      <hr className="my-6" />
 
       <BookForm
         book={currentBook}
@@ -142,7 +154,7 @@ const AdminHome = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       />
-    </div>
+    </Card>
   );
 };
 

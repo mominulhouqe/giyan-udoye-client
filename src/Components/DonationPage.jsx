@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Select, message } from "antd";
 import bkash from "../assets/bkash.png";
+import { motion } from "framer-motion";
+
 const DonationPage = () => {
   const [loading, setLoading] = useState(false);
 
@@ -19,97 +21,120 @@ const DonationPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 text-white">
-      <div>
-        <h1 className="text-5xl font-bold text-center mb-6 ">
-          Donate to GiyanUday Islamic Library
-        </h1>
-        <p className="text-center mb-8 text-lg text-gray-200">
-          Your donations help us continue our mission of providing free access
-          to Islamic literature and resources.
-        </p>
+    <div className="container mx-auto p-3 flex items-center justify-center ">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-6xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+      >
+        <div className="md:w-1/2 p-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+          <h1 className="text-4xl font-bold mb-6 text-center">
+            Support GiyanUday Islamic Library
+          </h1>
+          <p className="text-lg mb-8 text-center">
+            Your generosity fuels our mission to provide free access to Islamic
+            knowledge.
+          </p>
 
-        <div class="grid grid-cols-2 md:gap-8 gap-5 my-6">
-          <div class="flex gap-3 items-center">
-            <img src={bkash} alt="" className="w-14 " />
-
-            <div>
-              <h2 class="text-xl font-light">Bkash</h2>
-              <p class="font-light">01708409782</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8">
+            <div className="flex items-center bg-white bg-opacity-20 rounded-lg p-4">
+              <img src={bkash} alt="bKash" className="w-12 h-12 mr-4" />
+              <div>
+                <h2 className="text-xl font-semibold">bKash</h2>
+                <p className="text-sm">01708409782</p>
+              </div>
             </div>
-          </div>
-          <div class="flex gap-3 items-center">
-            <span class="bg-rose-400 rounded-full md:h-12 md:w-12 w-10  fill-white flex justify-center items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="m-2.5"
-                viewBox="0 0 448 512"
-              >
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-              </svg>
-            </span>
-            <div>
-              <h2 class="text-xl font-light">Call</h2>
-              <p class="font-light">01876697546</p>
+            <div className="flex items-center bg-white bg-opacity-20 rounded-lg p-4">
+              <span className="bg-rose-400 rounded-full h-12 w-12 flex justify-center items-center mr-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
+              </span>
+              <div>
+                <h2 className="text-xl font-semibold">Call Us</h2>
+                <p className="text-sm">01876697546</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-lg  w-full mx-auto bg-white p-8 rounded-lg shadow-md">
-        <Form layout="vertical" onFinish={onFinish}>
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: "Please enter your name" }]}
-          >
-            <Input placeholder="Enter your name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please enter your email" }]}
-          >
-            <Input type="email" placeholder="Enter your email" />
-          </Form.Item>
-
-          <Form.Item
-            label="Donation Amount"
-            name="amount"
-            rules={[
-              { required: true, message: "Please enter the donation amount" },
-            ]}
-          >
-            <Input type="number" placeholder="Enter donation amount" />
-          </Form.Item>
-
-          <Form.Item
-            label="Payment Method"
-            name="paymentMethod"
-            rules={[
-              { required: true, message: "Please select a payment method" },
-            ]}
-          >
-            <Select placeholder="Select payment method">
-              <Select.Option value="creditCard">Credit Card</Select.Option>
-              <Select.Option value="paypal">PayPal</Select.Option>
-              <Select.Option value="bankTransfer">Bank Transfer</Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              className="w-full"
+        <div className="md:w-1/2 p-8">
+          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+            Make a Donation
+          </h2>
+          <Form layout="vertical" onFinish={onFinish} className="space-y-4">
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: "Please enter your name" }]}
             >
-              Donate Now
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
+              <Input placeholder="Enter your name" className="rounded-md" />
+            </Form.Item>
+
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please enter your email" }]}
+            >
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className="rounded-md"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Donation Amount"
+              name="amount"
+              rules={[
+                { required: true, message: "Please enter the donation amount" },
+              ]}
+            >
+              <Input
+                type="number"
+                placeholder="Enter donation amount"
+                className="rounded-md"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Payment Method"
+              name="paymentMethod"
+              rules={[
+                { required: true, message: "Please select a payment method" },
+              ]}
+            >
+              <Select
+                placeholder="Select payment method"
+                className="rounded-md"
+              >
+                <Select.Option value="creditCard">Credit Card</Select.Option>
+                <Select.Option value="paypal">PayPal</Select.Option>
+                <Select.Option value="bankTransfer">
+                  Bank Transfer
+                </Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+              >
+                Donate Now
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      </motion.div>
     </div>
   );
 };
