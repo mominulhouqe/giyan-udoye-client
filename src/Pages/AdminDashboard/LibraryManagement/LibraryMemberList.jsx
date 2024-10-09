@@ -9,6 +9,7 @@ import {
   notification,
   Space,
   Typography,
+  InputNumber,
 } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
@@ -167,7 +168,7 @@ const LibraryMemberList = () => {
             label="Subscription Fee"
             rules={[{ required: true, type: "number" }]}
           >
-            <Input type="number" />
+            <InputNumber min={0} step={0.01} style={{ width: "100%" }} />
           </Form.Item>
           <Form.Item
             name="subscriptionDueDate"
