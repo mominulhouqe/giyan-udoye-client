@@ -68,7 +68,7 @@ const LastPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-gradient-to-b from-blue-50 to-purple-50">
+    <div className="p-4 border-b  border-gray-300">
       {/* Library Statistics */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}

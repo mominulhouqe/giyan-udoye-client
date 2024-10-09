@@ -125,8 +125,8 @@ const PaymentManagement = () => {
   ];
 
   return (
-    <Card>
-      <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
+    <Card className="p-0">
+      <Row className="mb-3 flex md:flex-row flex-col justify-between items-center">
         <Col>
           <Title level={2}>Payment Management</Title>
         </Col>

@@ -21,35 +21,41 @@ const DonationPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-3 flex items-center justify-center ">
+    <div className="p-8 bg-gradient-to-br from-indigo-100 to-purple-100">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-6xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+        className="w-full mx-auto bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row"
       >
-        <div className="md:w-1/2 p-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
-          <h1 className="text-4xl font-bold mb-6 text-center">
+        <div className="md:w-1/2 p-4 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
+          <h1 className="text-5xl font-extrabold mb-8 text-center leading-tight">
             Support GiyanUday Islamic Library
           </h1>
-          <p className="text-lg mb-8 text-center">
+          <p className="text-xl mb-10 text-center font-light">
             Your generosity fuels our mission to provide free access to Islamic
             knowledge.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8">
-            <div className="flex items-center bg-white bg-opacity-20 rounded-lg p-4">
-              <img src={bkash} alt="bKash" className="w-12 h-12 mr-4" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 my-12">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center bg-white bg-opacity-20 rounded-2xl p-6 transition-all duration-300 hover:bg-opacity-30"
+            >
+              <img src={bkash} alt="bKash" className="w-16 h-16 mr-6" />
               <div>
-                <h2 className="text-xl font-semibold">bKash</h2>
-                <p className="text-sm">01708409782</p>
+                <h2 className="text-2xl font-bold">bKash</h2>
+                <p className="text-lg opacity-80">01708409782</p>
               </div>
-            </div>
-            <div className="flex items-center bg-white bg-opacity-20 rounded-lg p-4">
-              <span className="bg-rose-400 rounded-full h-12 w-12 flex justify-center items-center mr-4">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center bg-white bg-opacity-20 rounded-2xl p-6 transition-all duration-300 hover:bg-opacity-30"
+            >
+              <span className="bg-rose-500 rounded-full h-16 w-16 flex justify-center items-center mr-6">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-white"
+                  className="h-8 w-8 text-white"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -57,40 +63,43 @@ const DonationPage = () => {
                 </svg>
               </span>
               <div>
-                <h2 className="text-xl font-semibold">Call Us</h2>
-                <p className="text-sm">01876697546</p>
+                <h2 className="text-2xl font-bold">Call Us</h2>
+                <p className="text-lg opacity-80">01876697546</p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        <div className="md:w-1/2 p-8">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+        <div className="md:w-1/2 p-4 bg-white">
+          <h2 className="text-4xl font-bold mb-8 text-gray-800 text-center">
             Make a Donation
           </h2>
-          <Form layout="vertical" onFinish={onFinish} className="space-y-4">
+          <Form layout="vertical" onFinish={onFinish} className="space-y-6">
             <Form.Item
-              label="Name"
+              label={<span className="text-lg">Name</span>}
               name="name"
               rules={[{ required: true, message: "Please enter your name" }]}
             >
-              <Input placeholder="Enter your name" className="rounded-md" />
+              <Input
+                placeholder="Enter your name"
+                className="rounded-lg text-lg py-2"
+              />
             </Form.Item>
 
             <Form.Item
-              label="Email"
+              label={<span className="text-lg">Email</span>}
               name="email"
               rules={[{ required: true, message: "Please enter your email" }]}
             >
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className="rounded-md"
+                className="rounded-lg text-lg py-2"
               />
             </Form.Item>
 
             <Form.Item
-              label="Donation Amount"
+              label={<span className="text-lg">Donation Amount</span>}
               name="amount"
               rules={[
                 { required: true, message: "Please enter the donation amount" },
@@ -99,12 +108,12 @@ const DonationPage = () => {
               <Input
                 type="number"
                 placeholder="Enter donation amount"
-                className="rounded-md"
+                className="rounded-lg text-lg py-2"
               />
             </Form.Item>
 
             <Form.Item
-              label="Payment Method"
+              label={<span className="text-lg">Payment Method</span>}
               name="paymentMethod"
               rules={[
                 { required: true, message: "Please select a payment method" },
@@ -112,7 +121,8 @@ const DonationPage = () => {
             >
               <Select
                 placeholder="Select payment method"
-                className="rounded-md"
+                className="rounded-lg text-lg"
+                size="large"
               >
                 <Select.Option value="creditCard">Credit Card</Select.Option>
                 <Select.Option value="paypal">PayPal</Select.Option>
@@ -127,7 +137,7 @@ const DonationPage = () => {
                 type="primary"
                 htmlType="submit"
                 loading={loading}
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-700 hover:from-indigo-700 hover:to-purple-800 text-white text-xl font-bold py-3 px-6 rounded-xl transition duration-300 shadow-lg hover:shadow-xl"
               >
                 Donate Now
               </Button>

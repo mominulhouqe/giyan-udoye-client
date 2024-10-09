@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Menu, Drawer, message, Avatar, Typography } from "antd";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, logout } from "../../../redux/slices/authSlice";
 
@@ -21,20 +21,24 @@ const items = [
   {
     key: "back",
     icon: <BackwardFilled />,
-    label: <NavLink to="/">Back to Main</NavLink>,
+    label: "Back to Main",
+    link: "/",
   },
   {
     key: "Home1",
     icon: <HomeFilled />,
-    label: <NavLink to="/admin">Home</NavLink>,
+    label: "Home",
+    link: "/admin",
     children: [
       {
         key: "h1",
-        label: <NavLink to="blogs">Blog Management</NavLink>,
+        label: "Blog Management",
+        link: "blogs",
       },
       {
         key: "h3",
-        label: <NavLink to="quotes">Quotes Management</NavLink>,
+        label: "Quotes Management",
+        link: "quotes",
       },
     ],
   },
@@ -43,18 +47,21 @@ const items = [
     label: "Library Management",
     icon: <BookOutlined />,
     children: [
-      { key: "1", label: <NavLink to="/admin">All Books</NavLink> },
+      { key: "1", label: "All Books", link: "/admin" },
       {
         key: "2",
-        label: <NavLink to="library-member">Add Library Members</NavLink>,
+        label: "Add Library Members",
+        link: "library-member",
       },
       {
         key: "3",
-        label: <NavLink to="payment-member">Payment Library Members</NavLink>,
+        label: "Payment Library Members",
+        link: "payment-member",
       },
       {
         key: "4",
-        label: <NavLink to="payment-report">Payment History</NavLink>,
+        label: "Payment History",
+        link: "payment-report",
       },
     ],
   },
@@ -65,15 +72,18 @@ const items = [
     children: [
       {
         key: "6c",
-        label: <NavLink to="student-management">Student Management</NavLink>,
+        label: "Student Management",
+        link: "student-management",
       },
       {
         key: "7c",
-        label: <NavLink to="subject-management">Subject Management</NavLink>,
+        label: "Subject Management",
+        link: "subject-management",
       },
       {
         key: "8c",
-        label: <NavLink to="tutor-management">Tutor Management</NavLink>,
+        label: "Tutor Management",
+        link: "tutor-management",
       },
       { key: "9c", label: "Blocked Users" },
     ],
@@ -81,7 +91,8 @@ const items = [
   {
     key: "9",
     icon: <HistoryOutlined />,
-    label: <NavLink to="allusers">All Users</NavLink>,
+    label: "All Users",
+    link: "allusers",
   },
 ];
 
@@ -119,10 +130,24 @@ const SideNavbar = () => {
     setDrawerVisible(false);
   };
 
+  const handleMenuClick = (link) => {
+    navigate(link);
+    onClose();
+  };
+
   const UserProfileSection = () => (
-    <div className="flex flex-col items-center p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg mb-4">
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg mb-4"
+    >
       <Link to="/user-profile">
-        <motion.div whileHover={{ scale: 1.1 }} className="mb-2">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="mb-2"
+        >
           <Avatar
             size={64}
             src={user?.profileImage}
@@ -145,8 +170,29 @@ const SideNavbar = () => {
       >
         Logout
       </Button>
-    </div>
+    </motion.div>
   );
+
+  const renderMenuItems = (menuItems) => {
+    return menuItems.map((item) => {
+      if (item.children) {
+        return (
+          <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
+            {renderMenuItems(item.children)}
+          </Menu.SubMenu>
+        );
+      }
+      return (
+        <Menu.Item
+          key={item.key}
+          icon={item.icon}
+          onClick={() => handleMenuClick(item.link)}
+        >
+          {item.label}
+        </Menu.Item>
+      );
+    });
+  };
 
   return (
     <>
@@ -163,33 +209,44 @@ const SideNavbar = () => {
         </div>
 
         {/* Drawer for Mobile */}
-        <Drawer
-          title="Dashboard Menu"
-          placement="left"
-          onClose={onClose}
-          open={drawerVisible}
-          width={300}
-          bodyStyle={{ padding: 0 }}
+        <AnimatePresence>
+          {drawerVisible && (
+            <Drawer
+              title="Dashboard Menu"
+              placement="left"
+              onClose={onClose}
+              open={drawerVisible}
+              width={300}
+              bodyStyle={{ padding: 0 }}
+            >
+              <UserProfileSection />
+              <Menu
+                mode="inline"
+                selectedKeys={[location.pathname]}
+                className="border-r-0"
+              >
+                {renderMenuItems(items)}
+              </Menu>
+            </Drawer>
+          )}
+        </AnimatePresence>
+
+        {/* Desktop Sidebar */}
+        <motion.div
+          initial={{ x: -300 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="hidden lg:block w-64 fixed z-50 h-full overflow-y-auto bg-white shadow-lg"
         >
           <UserProfileSection />
           <Menu
             mode="inline"
             selectedKeys={[location.pathname]}
-            items={items}
             className="border-r-0"
-          />
-        </Drawer>
-
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block w-64 fixed z-50 h-full overflow-y-auto bg-white shadow-lg">
-          <UserProfileSection />
-          <Menu
-            mode="inline"
-            selectedKeys={[location.pathname]}
-            items={items}
-            className="border-r-0"
-          />
-        </div>
+          >
+            {renderMenuItems(items)}
+          </Menu>
+        </motion.div>
       </div>
     </>
   );

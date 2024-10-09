@@ -63,7 +63,7 @@ const ReportView = () => {
   ];
 
   return (
-    <Card className="border-0 p-0 m-0 w-full">
+    <Card className=" p-0 m-0 w-full">
       <Title level={2}>Reports</Title>
       <Divider />
       <Space direction="vertical" size="large" style={{ width: "100%" }}>

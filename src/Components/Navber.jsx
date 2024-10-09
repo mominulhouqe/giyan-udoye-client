@@ -66,7 +66,7 @@ const Navber = () => {
   );
 
   return (
-    <div className="sticky top-0 w-full z-20 bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+    <div className="sticky top-0 w-full z-50 bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
       <div className="container mx-auto flex justify-between items-center p-4 text-white">
         <Link
           to="/"

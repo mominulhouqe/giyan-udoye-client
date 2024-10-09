@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
-import { Card, Spin, message } from "antd";
+import { Spin, message } from "antd";
 import axios from "axios";
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
-// Import required modules
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import BookCard from "./BookCard";
-import { Link } from "react-router-dom";
 
 const FeaturedBooks = () => {
   const [books, setBooks] = useState([]);
@@ -22,13 +15,13 @@ const FeaturedBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/books"); // Fetch all books
-
-        // Filter out only the featured books
-        const featuredBooks = response.data.filter((book) => book.featured); // Adjust property based on your data
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/books"
+        );
+        const featuredBooks = response.data.filter((book) => book.featured);
         setBooks(featuredBooks);
       } catch (error) {
-        console.error("Error fetching books:", error); // Log error for debugging
+        console.error("Error fetching books:", error);
         message.error("Failed to fetch books");
       } finally {
         setLoading(false);
@@ -39,19 +32,24 @@ const FeaturedBooks = () => {
   }, []);
 
   if (loading) {
-    return <Spin tip="Loading featured books..." />;
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Spin size="large" tip="Loading featured books..." />
+      </div>
+    );
   }
 
   return (
-    <div className="py-12 bg-gray-50 bg-opacity-50 m-3 rounded-md">
-      <h2 className="text-3xl text-center font-bold mb-8 underline">
-        Featured Books
+    <div className="p-4 border-b  border-gray-300">
+      <h2 className="text-2xl md:text-4xl text-center font-bold mb-6 md:mb-12 text-indigo-800 relative">
+        <span className="relative z-10">Featured Books</span>
+        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 md:w-32 h-1 bg-yellow-400"></span>
       </h2>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={2} // Show 3 slides at a time
+        slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -60,36 +58,42 @@ const FeaturedBooks = () => {
           slideShadows: true,
         }}
         pagination={{ clickable: true }}
-        modules={[EffectCoverflow, Pagination]}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper"
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
         breakpoints={{
-          // Adjust slidesPerView for different screen sizes
-          640: {
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          480: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 30 },
+          1024: { slidesPerView: 4, spaceBetween: 40 },
         }}
       >
         {books.length > 0 ? (
           books.map((book) => (
-            <SwiperSlide key={book._id}>
-              <BookCard
-                title={book.title}
-                author={book.author}
-                description={book.description}
-                image={book.image}
-                id={book._id}
-              />
+            <SwiperSlide
+              key={book._id}
+              className="w-full sm:w-64 md:w-72 lg:w-80 xl:w-96"
+            >
+              <div className="p-2 md:p-4 transform transition duration-500 hover:scale-105">
+                <BookCard
+                  title={book.title}
+                  author={book.author}
+                  description={book.description}
+                  image={book.image}
+                  id={book._id}
+                />
+              </div>
             </SwiperSlide>
           ))
         ) : (
           <SwiperSlide>
-            <p className="text-center">No featured books available</p>
+            <p className="text-center text-lg md:text-xl text-gray-600">
+              No featured books available
+            </p>
           </SwiperSlide>
         )}
       </Swiper>

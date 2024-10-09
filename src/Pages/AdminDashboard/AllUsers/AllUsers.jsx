@@ -67,20 +67,20 @@ const AllUsers = () => {
   if (loading) return <Spin tip="Loading..." className="block mx-auto mt-20" />;
 
   return (
-    <div className="container mx-auto p-6 lg:p-12">
-      <h2 className="py-4 mb-6 text-3xl font-bold text-center text-gray-800">
+    <div className="container mx-auto p-4">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
         All Users
       </h2>
-      <Card title="User List" className="shadow-lg rounded-lg bg-white">
+      <Card title="User List" className="rounded-lg  bg-white">
         {users.length === 0 ? (
           <p className="text-center text-gray-500">No users found</p>
         ) : (
           users.map((user) => (
             <div
               key={user._id}
-              className="border-b border-gray-300 py-4 flex items-center justify-between"
+              className="border-b border-gray-300 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between"
             >
-              <div className="flex-1">
+              <div className="flex-1 mb-4 sm:mb-0">
                 <h3 className="text-lg font-semibold text-gray-800">
                   {user.name}
                 </h3>
@@ -91,7 +91,7 @@ const AllUsers = () => {
                   </Tag>
                 )}
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
                 <Button
                   type="danger"
                   size="small"

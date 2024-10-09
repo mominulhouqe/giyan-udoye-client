@@ -9,11 +9,11 @@ const Admin = () => {
         <SideNavbar />
       </div>
       <div className="flex-1 overflow-x-hidden overflow-y-auto">
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-2">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6">
             Admin Dashboard
           </h1>
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="">
             <Outlet />
           </div>
         </div>

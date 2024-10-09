@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import SubjectCard from "./SubjectCard";
+import { motion } from "framer-motion";
+import { Input, Typography, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
+const { Title } = Typography;
 
 const SubjectsList = () => {
   const [subjects, setSubjects] = useState([]);
@@ -9,7 +14,9 @@ const SubjectsList = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get(" https://giyan-udoye.vercel.app/api/v1/subjects");
+        const response = await axios.get(
+          "https://giyan-udoye.vercel.app/api/v1/subjects"
+        );
         setSubjects(response.data);
       } catch (error) {
         console.error("Failed to fetch subjects", error);
@@ -19,7 +26,6 @@ const SubjectsList = () => {
     fetchSubjects();
   }, []);
 
-  // Filter subjects based on the search query
   const filteredSubjects = subjects.filter(
     (subject) =>
       subject.subjectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -27,32 +33,48 @@ const SubjectsList = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-4xl text-center text-white font-bold my-8 underline">
-        Coaching Subjects
-      </h2>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="container mx-auto p-8 rounded-lg"
+    >
+      <Title level={2} className="text-center font-bold my-12">
+        <span className="bg-clip-text  text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
+          Explore Our Coaching Subjects
+        </span>
+      </Title>
 
-      {/* Search Input */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search subject name and class name..."
+      <Space direction="vertical" size="large" className="w-full mt-4">
+        <Input
+          size="large"
+          placeholder="Search subjects or classes..."
+          prefix={<SearchOutlined />}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-2 rounded border border-gray-300"
+          className="w-full max-w-md mx-auto border rounded-full shadow-lg"
         />
-      </div>
 
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {filteredSubjects.length > 0 ? (
-          filteredSubjects.map((subject) => (
-            <SubjectCard key={subject._id} subject={subject} />
-          ))
-        ) : (
-          <p className="text-center text-white">No subjects found</p>
-        )}
-      </div>
-    </div>
+        <motion.div
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, staggerChildren: 0.1 }}
+        >
+          {filteredSubjects.length > 0 ? (
+            filteredSubjects.map((subject) => (
+              <motion.div key={subject._id}>
+                <SubjectCard subject={subject} />
+              </motion.div>
+            ))
+          ) : (
+            <p className="text-center col-span-full text-lg">
+              No subjects found. Try a different search term.
+            </p>
+          )}
+        </motion.div>
+      </Space>
+    </motion.div>
   );
 };
 

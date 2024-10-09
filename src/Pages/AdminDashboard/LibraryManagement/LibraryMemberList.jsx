@@ -117,8 +117,8 @@ const LibraryMemberList = () => {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-6">
+    <div className=" bg-white rounded-lg ">
+      <div className="flex md:flex-row flex-col justify-between items-center mb-6">
         <Title level={2}>Library Members</Title>
         <Button
           type="primary"

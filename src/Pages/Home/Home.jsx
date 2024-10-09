@@ -8,11 +8,11 @@ import LastPage from "./lastPage";
 
 const Home = () => {
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto bg-gradient-to-r from-indigo-100 to-purple-100">
       <Hero />
       <Books />
       <FeaturedBooks />
-     <LastPage />
+      <LastPage />
       <Testimonials />
       <DonationPage />
     </div>
