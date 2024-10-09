@@ -45,9 +45,9 @@ const UserProfile = () => {
     );
 
   return (
-    <div className="p-4 flex justify-center items-center h-[calc(100vh-345px)]">
+    <div className="p-4 flex md:flex-row gap-4 flex-col justify-center items-center md:h-[calc(100vh-345px)]">
       <Card
-        className="w-full max-w-md mx-auto text-center space-y-6 shadow-lg rounded-lg overflow-hidden"
+        className="w-full max-w-md mx-auto text-center space-y-6 shadow-md rounded-lg overflow-hidden"
         cover={
           <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-32" />
         }

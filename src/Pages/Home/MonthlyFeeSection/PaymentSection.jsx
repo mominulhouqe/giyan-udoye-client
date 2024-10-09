@@ -24,7 +24,7 @@ const PaymentSection = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-md mx-auto w-full p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold text-center">
         Monthly Fee Payment
       </h2>
