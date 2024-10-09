@@ -3,6 +3,7 @@ import { Card, Spin, Button, message, Avatar, Typography } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { EditOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
+import PaymentSection from "../../Home/MonthlyFeeSection/PaymentSection";
 
 const { Title, Text } = Typography;
 
@@ -77,6 +78,7 @@ const UserProfile = () => {
           Edit Profile
         </Button>
       </Card>
+      <PaymentSection />
     </div>
   );
 };
