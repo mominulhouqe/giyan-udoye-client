@@ -7,7 +7,7 @@ import TutorsList from "./LibrayComponent/TutorsList";
 
 const Coaching = () => {
   return (
-    <div className="p-2">
+    <div className="p-2 container mx-auto">
       <CoachingHero />
 
       <SubjectsList />
