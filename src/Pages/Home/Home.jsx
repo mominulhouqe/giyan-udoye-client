@@ -8,7 +8,7 @@ import LastPage from "./lastPage";
 
 const Home = () => {
   return (
-    <div className="container mx-auto bg-gradient-to-r from-indigo-100 to-purple-100">
+    <div className="container mx-auto ">
       <Hero />
       <Books />
       <FeaturedBooks />

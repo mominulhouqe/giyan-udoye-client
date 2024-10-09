@@ -37,7 +37,7 @@ const SubjectsList = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="container mx-auto p-8 rounded-lg"
+      className=""
     >
       <Title level={2} className="text-center font-bold my-12">
         <span className="bg-clip-text  text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">

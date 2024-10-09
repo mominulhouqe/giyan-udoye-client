@@ -8,9 +8,9 @@ const { Content } = Layout;
 
 function App() {
   return (
-    <div className="">
+    <div className="bg-gradient-to-r from-indigo-100 to-purple-100">
       <Navbar />
-      <Content className="container mx-auto p-4 flex-grow">
+      <Content className=" ">
         <Outlet />
       </Content>
       <Footer />

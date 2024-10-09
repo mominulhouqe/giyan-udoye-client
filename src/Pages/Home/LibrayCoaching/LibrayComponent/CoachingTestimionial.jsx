@@ -29,12 +29,12 @@ const CoachingTestimionial = () => {
       transition={{ duration: 0.5 }}
       className="py-16 "
     >
-      <div className="container mx-auto px-4">
+      <div className="">
         <motion.h2
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-4xl font-bold mb-12 text-center text-white"
+          className="text-4xl font-bold mb-12 text-center "
         >
           What Our Students Say
         </motion.h2>
@@ -45,7 +45,7 @@ const CoachingTestimionial = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-              className="bg-white p-8 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              className="bg-white p-4 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
             >
               <div className="flex flex-col items-center">
                 <Avatar

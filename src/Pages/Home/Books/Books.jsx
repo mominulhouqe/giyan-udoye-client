@@ -89,9 +89,9 @@ const Books = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6"
           >
-            {filteredBooks.slice(0, 8).map((book, index) => (
+            {filteredBooks.slice(0, 6).map((book, index) => (
               <motion.div
                 key={book._id}
                 initial={{ opacity: 0, y: 20 }}

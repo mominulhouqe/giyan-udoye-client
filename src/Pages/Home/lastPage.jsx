@@ -76,7 +76,7 @@ const LastPage = () => {
         transition={{ duration: 0.5 }}
         className="mb-16"
       >
-        <Title className="text-center mb-8 text-4xl font-bold text-indigo-700">
+        <Title className="text-center mb-8 text-3xl font-bold text-indigo-700">
           Library Statistics
         </Title>
         <Row gutter={[24, 24]} justify="center">

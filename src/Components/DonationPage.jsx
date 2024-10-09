@@ -21,15 +21,15 @@ const DonationPage = () => {
   };
 
   return (
-    <div className="p-8 bg-gradient-to-br from-indigo-100 to-purple-100">
+    <div className=" bg-gradient-to-br from-indigo-100 to-purple-100 mb-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full mx-auto bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row"
+        className="w-full mx-auto bg-white md:rounded-3xl overflow-hidden flex flex-col md:flex-row"
       >
         <div className="md:w-1/2 p-4 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-          <h1 className="text-5xl font-extrabold mb-8 text-center leading-tight">
+          <h1 className="text-3xl font-extrabold mb-8 text-center leading-tight">
             Support GiyanUday Islamic Library
           </h1>
           <p className="text-xl mb-10 text-center font-light">

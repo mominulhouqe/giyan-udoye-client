@@ -38,7 +38,7 @@ const testimonials = [
 
 const Testimonials = () => (
   <div className="p-4 border-b  border-gray-300">
-    <h2 className="text-4xl text-center font-bold mb-8 text-indigo-800">
+    <h2 className="text-3xl text-center font-bold mb-8 text-indigo-800">
       What Our Users Say
     </h2>
 
